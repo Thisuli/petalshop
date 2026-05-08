@@ -1,0 +1,410 @@
+/* ================================
+   PETALSHOP - GLOBAL STYLES
+   Used on every single page
+================================ */
+
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+/* Reset all default browser styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Apply Poppins font to everything */
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #FAFAFA;
+  color: #1a1a1a;
+}
+
+/* ================================
+   COLOUR VARIABLES
+   Use these everywhere!
+================================ */
+:root {
+  --black:       #1a1a1a;   /* Main black */
+  --yellow:      #F5C518;   /* Main yellow */
+  --yellow-dark: #B8860B;   /* Dark gold */
+  --yellow-light:#FFF9E6;   /* Light yellow tint */
+  --white:       #ffffff;   /* White */
+  --off-white:   #FAFAFA;   /* Page background */
+  --grey-light:  #E5E5E5;   /* Borders */
+  --grey-mid:    #888888;   /* Muted text */
+  --grey-dark:   #333333;   /* Body text */
+  --green:       #22C55E;   /* Success */
+  --red:         #EF4444;   /* Error / danger */
+}
+
+/* ================================
+   NAVBAR STYLES
+================================ */
+.navbar {
+  background-color: var(--black);
+  padding: 12px 40px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+/* Logo wrapper */
+.navbar .logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  margin-right: auto;  /* pushes everything else to the right */
+}
+
+/* Logo flower circle */
+.navbar .logo-icon {
+  width: 32px;
+  height: 32px;
+  background-color: var(--yellow);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+/* Logo text */
+.navbar .logo-text {
+  color: var(--white);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.navbar .logo-text span {
+  color: var(--yellow);
+}
+
+/* Nav links */
+.navbar a.nav-link {
+  color: #aaaaaa;
+  font-size: 13px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.navbar a.nav-link:hover {
+  color: var(--yellow);
+}
+
+/* Cart button */
+.navbar .cart-btn {
+  background-color: var(--yellow);
+  color: var(--black);
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Poppins', sans-serif;
+  text-decoration: none;
+}
+
+.navbar .cart-btn:hover {
+  background-color: #e6b800;
+}
+
+/* Cart item count badge */
+.cart-count {
+  background-color: var(--black);
+  color: var(--yellow);
+  font-size: 10px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+/* ================================
+   FOOTER STYLES
+================================ */
+footer {
+  background-color: var(--black);
+  margin-top: auto;
+}
+
+/* Newsletter strip */
+.footer-strip {
+  background-color: var(--yellow);
+  padding: 12px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.footer-strip p {
+  color: var(--black);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.footer-strip-right {
+  display: flex;
+  gap: 8px;
+}
+
+.footer-strip input {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 7px;
+  font-size: 12px;
+  font-family: 'Poppins', sans-serif;
+  width: 200px;
+  outline: none;
+}
+
+.footer-strip button {
+  background-color: var(--black);
+  color: var(--yellow);
+  border: none;
+  border-radius: 7px;
+  padding: 8px 16px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Footer main grid */
+.footer-main {
+  padding: 32px 40px;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 28px;
+  border-bottom: 1px solid #2a2a2a;
+}
+
+/* Footer brand description */
+.footer-brand p {
+  color: #777777;
+  font-size: 12px;
+  line-height: 1.7;
+  margin: 10px 0 14px;
+}
+
+/* Footer social icons */
+.footer-socials {
+  display: flex;
+  gap: 8px;
+}
+
+.footer-socials a {
+  width: 30px;
+  height: 30px;
+  border-radius: 7px;
+  border: 1px solid #2a2a2a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #777;
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.footer-socials a:hover {
+  background-color: var(--yellow);
+  color: var(--black);
+  border-color: var(--yellow);
+}
+
+/* Footer contact info */
+.footer-contact {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.footer-contact span {
+  color: #777;
+  font-size: 11px;
+}
+
+/* Footer column headings */
+.footer-col h4 {
+  color: var(--white);
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid var(--yellow);
+  display: inline-block;
+}
+
+/* Footer links */
+.footer-col ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.footer-col ul li a {
+  color: #777777;
+  font-size: 12px;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-col ul li a:hover {
+  color: var(--yellow);
+}
+
+/* Footer trust badges */
+.footer-trust {
+  padding: 14px 40px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  border-bottom: 1px solid #2a2a2a;
+}
+
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.trust-icon {
+  width: 32px;
+  height: 32px;
+  background-color: #2a2a2a;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content:center;
+  font-size: 15px;
+  flex-shrink: 0;
+}
+
+.trust-item strong {
+  display: block;
+  color: #cccccc;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.trust-item span {
+  color: #666666;
+  font-size: 10px;
+}
+
+/* Footer bottom bar */
+.footer-bottom {
+  padding: 12px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.footer-bottom p {
+  color: #555555;
+  font-size: 11px;
+}
+
+.footer-bottom p b {
+  color: var(--yellow);
+}
+
+.footer-bottom-links {
+  display: flex;
+  gap: 16px;
+}
+
+.footer-bottom-links a {
+  color: #555555;
+  font-size: 11px;
+  text-decoration: none;
+}
+
+.footer-bottom-links a:hover {
+  color: var(--yellow);
+}
+
+.footer-payments {
+  display: flex;
+  gap: 6px;
+}
+
+.pay-badge {
+  background-color: #2a2a2a;
+  border: 1px solid #3a3a3a;
+  border-radius: 4px;
+  padding: 3px 8px;
+  font-size: 10px;
+  color: #888;
+  font-weight: 700;
+}
+
+/* ================================
+   BUTTON STYLES (Reusable)
+================================ */
+.btn-black {
+  background-color: var(--black);
+  color: var(--yellow);
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  transition: opacity 0.2s;
+}
+
+.btn-black:hover { opacity: 0.85; }
+
+.btn-yellow {
+  background-color: var(--yellow);
+  color: var(--black);
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  transition: background-color 0.2s;
+}
+
+.btn-yellow:hover { background-color: #e6b800; }
+
+.btn-outline {
+  background-color: transparent;
+  color: var(--black);
+  border: 2px solid var(--black);
+  border-radius: 8px;
+  padding: 11px 24px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+}
+
+.btn-outline:hover {
+  background-color: var(--black);
+  color: var(--yellow);
+}
