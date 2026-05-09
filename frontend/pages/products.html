@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PetalShop — All Flowers</title>
+  <link rel="stylesheet" href="../css/style.css"/>
+  <link rel="stylesheet" href="../css/products.css"/>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a href="products.html" class="logo">
+      <div class="logo-icon">🌸</div>
+      <div class="logo-text">Petal<span>Shop</span></div>
+    </a>
+    <a href="products.html" class="nav-link">Home</a>
+    <a href="order-history.html" class="nav-link">My Orders</a>
+    <a href="login.html" class="nav-link" id="authLink">Account</a>
+    <a href="cart.html" class="cart-btn">
+      🛒 Cart <span class="cart-count" id="cartCount">0</span>
+    </a>
+  </nav>
+
+  <!-- HERO YELLOW BAR -->
+  <div class="hero-bar">
+    <div class="hero-left">
+      <h2>🌸 Fresh Flowers & Bouquets</h2>
+      <p>Hand-picked daily — straight from the farm to your door</p>
+    </div>
+    <div class="filter-pills">
+      <button class="pill active" onclick="filterByCategory('all', this)">All</button>
+      <button class="pill" onclick="filterByCategory('roses', this)">Roses</button>
+      <button class="pill" onclick="filterByCategory('sunflowers', this)">Sunflowers</button>
+      <button class="pill" onclick="filterByCategory('tulips', this)">Tulips</button>
+      <button class="pill" onclick="filterByCategory('bouquets', this)">Bouquets</button>
+      <button class="pill" onclick="filterByCategory('seasonal', this)">Seasonal</button>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="page-content">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sb-section">
+        <p class="sb-head">Categories</p>
+        <div class="sb-item active" onclick="filterByCategory('all', this)">
+          <span>All flowers</span><span class="sb-count">8</span>
+        </div>
+        <div class="sb-item" onclick="filterByCategory('roses', this)">
+          <span>Roses 🌹</span><span class="sb-count">2</span>
+        </div>
+        <div class="sb-item" onclick="filterByCategory('sunflowers', this)">
+          <span>Sunflowers 🌻</span><span class="sb-count">1</span>
+        </div>
+        <div class="sb-item" onclick="filterByCategory('tulips', this)">
+          <span>Tulips 🌷</span><span class="sb-count">1</span>
+        </div>
+        <div class="sb-item" onclick="filterByCategory('bouquets', this)">
+          <span>Bouquets 💐</span><span class="sb-count">2</span>
+        </div>
+        <div class="sb-item" onclick="filterByCategory('seasonal', this)">
+          <span>Seasonal 🌸</span><span class="sb-count">2</span>
+        </div>
+      </div>
+
+      <hr class="sb-divider"/>
+
+      <div class="sb-section">
+        <p class="sb-head">Price range</p>
+        <div class="price-label">
+          <span>Price</span>
+          <span id="priceDisplay" style="color:#B8860B;font-weight:700">$0 – $100</span>
+        </div>
+        <input type="range" id="priceRange" min="0" max="100" value="100"
+               class="price-slider" oninput="filterByPrice(this.value)"/>
+        <div class="price-ends"><span>$0</span><span>$100</span></div>
+      </div>
+
+      <hr class="sb-divider"/>
+
+      <div class="sb-section">
+        <p class="sb-head">Occasion</p>
+        <div class="sb-item active"><span>Birthday 🎂</span></div>
+        <div class="sb-item"><span>Wedding 💍</span></div>
+        <div class="sb-item"><span>Anniversary 💑</span></div>
+        <div class="sb-item"><span>Sympathy 🕊️</span></div>
+      </div>
+
+      <hr class="sb-divider"/>
+
+      <div class="sb-section">
+        <p class="sb-head">Rating</p>
+        <div class="sb-item active"><span style="color:#F5C518">★★★★★</span></div>
+        <div class="sb-item"><span style="color:#F5C518">★★★★</span><span style="color:#aaa;font-size:10px">+</span></div>
+        <div class="sb-item"><span style="color:#F5C518">★★★</span><span style="color:#aaa;font-size:10px">+</span></div>
+      </div>
+    </aside>
+
+    <!-- PRODUCTS AREA -->
+    <div class="products-area">
+      <div class="sort-row">
+        <p class="sort-info">Showing <strong id="productCount">8</strong> flowers</p>
+        <select class="sort-select" onchange="sortProducts(this.value)">
+          <option value="featured">Sort: Featured</option>
+          <option value="price-low">Price: Low to High</option>
+          <option value="price-high">Price: High to Low</option>
+          <option value="rating">Best Rated</option>
+        </select>
+      </div>
+
+      <!-- Product cards will be injected here by JS -->
+      <div class="products-grid" id="productsGrid"></div>
+
+      <!-- No results message -->
+      <div class="no-results" id="noResults" style="display:none">
+        <p>😔 No flowers found. Try a different filter!</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-strip">
+      <p>📧 Get fresh flower deals in your inbox!</p>
+      <div class="footer-strip-right">
+        <input type="email" placeholder="Your email address..."/>
+        <button>Subscribe</button>
+      </div>
+    </div>
+    <div class="footer-main">
+      <div class="footer-brand">
+        <a href="#" class="logo" style="text-decoration:none;display:flex;align-items:center;gap:8px;">
+          <div class="logo-icon">🌸</div>
+          <div class="logo-text">Petal<span>Shop</span></div>
+        </a>
+        <p>Sri Lanka's favourite online flower shop. Hand-picked, farm-fresh flowers for every occasion.</p>
+        <div class="footer-socials">
+          <a href="#">f</a><a href="#">in</a><a href="#">tw</a><a href="#">yt</a>
+        </div>
+        <div class="footer-contact">
+          <span>📞 +94 11 234 5678</span>
+          <span>📧 hello@petalshop.lk</span>
+          <span>📍 45 Flower Lane, Colombo 03</span>
+          <span>🕐 Mon–Sat: 8 AM – 8 PM</span>
+        </div>
+      </div>
+      <div class="footer-col"><h4>Shop</h4><ul><li><a href="#">› All flowers</a></li><li><a href="#">› Roses</a></li><li><a href="#">› Sunflowers</a></li><li><a href="#">› Tulips</a></li><li><a href="#">› Bouquets</a></li></ul></div>
+      <div class="footer-col"><h4>Help</h4><ul><li><a href="#">› My account</a></li><li><a href="#">› Track order</a></li><li><a href="#">› Delivery info</a></li><li><a href="#">› Returns</a></li><li><a href="#">› FAQs</a></li></ul></div>
+      <div class="footer-col"><h4>Company</h4><ul><li><a href="#">› About us</a></li><li><a href="#">› Our florists</a></li><li><a href="#">› Blog</a></li><li><a href="#">› Careers</a></li><li><a href="#">› Sitemap</a></li></ul></div>
+    </div>
+    <div class="footer-trust">
+      <div class="trust-item"><div class="trust-icon">🚚</div><div><strong>Same-day delivery</strong><span>Order before 2 PM</span></div></div>
+      <div class="trust-item"><div class="trust-icon">🌿</div><div><strong>100% fresh</strong><span>Or replace free</span></div></div>
+      <div class="trust-item"><div class="trust-icon">🔒</div><div><strong>Secure checkout</strong><span>256-bit SSL</span></div></div>
+      <div class="trust-item"><div class="trust-icon">🎁</div><div><strong>Free gift wrap</strong><span>Every order</span></div></div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 <b>PetalShop</b>. All rights reserved. Made with love in Sri Lanka.</p>
+      <div class="footer-bottom-links"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">Cookies</a></div>
+      <div class="footer-payments"><span class="pay-badge">VISA</span><span class="pay-badge">MC</span><span class="pay-badge">PayPal</span><span class="pay-badge">Cash</span></div>
+    </div>
+  </footer>
+
+  <script src="../js/products.js"></script>
+
+</body>
+</html>
