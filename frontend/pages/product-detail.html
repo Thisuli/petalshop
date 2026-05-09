@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PetalShop — Product Detail</title>
+  <link rel="stylesheet" href="../css/style.css"/>
+  <link rel="stylesheet" href="../css/product-detail.css"/>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a href="products.html" class="logo">
+      <div class="logo-icon">🌸</div>
+      <div class="logo-text">Petal<span>Shop</span></div>
+    </a>
+    <a href="products.html" class="nav-link">Home</a>
+    <a href="products.html" class="nav-link">Products</a>
+    <a href="order-history.html" class="nav-link">My Orders</a>
+    <a href="login.html" class="nav-link">Account</a>
+    <a href="cart.html" class="cart-btn">
+      🛒 Cart <span class="cart-count" id="cartCount">0</span>
+    </a>
+  </nav>
+
+  <!-- BREADCRUMB -->
+  <div class="breadcrumb">
+    <a href="products.html">Home</a>
+    <span class="bc-sep">›</span>
+    <a href="products.html">Flowers</a>
+    <span class="bc-sep">›</span>
+    <span id="bcCategory">Roses</span>
+    <span class="bc-sep">›</span>
+    <span id="bcName" class="bc-current">Product</span>
+  </div>
+
+  <!-- MAIN BODY -->
+  <div class="detail-body">
+
+    <!-- LEFT — IMAGE SECTION -->
+    <div class="img-section">
+
+      <!-- Main large image -->
+      <div class="main-img-box" id="mainImgBox">
+        <img
+          src=""
+          alt="Product"
+          class="main-img"
+          id="mainImg"
+          onerror="this.style.display='none';
+                   document.getElementById('mainEmoji').style.display='flex'"
+        />
+        <div class="main-emoji" id="mainEmoji" style="display:none"></div>
+
+        <!-- Badges -->
+        <span class="detail-badge" id="detailBadge" style="display:none"></span>
+      </div>
+
+      <!-- Thumbnail row -->
+      <div class="thumbs-row" id="thumbsRow">
+        <!-- thumbnails injected by JS -->
+      </div>
+    </div>
+
+    <!-- RIGHT — PRODUCT INFO -->
+    <div class="info-section">
+
+      <!-- Category tag -->
+      <p class="detail-cat" id="detailCat">Roses</p>
+
+      <!-- Product title -->
+      <h1 class="detail-title" id="detailTitle">Loading...</h1>
+
+      <!-- Rating row -->
+      <div class="rating-row">
+        <span class="stars" id="detailStars">★★★★★</span>
+        <span class="detail-score" id="detailScore">4.9</span>
+        <span class="detail-reviews" id="detailReviews">(312 reviews)</span>
+        <span class="divider-dot">|</span>
+        <span class="detail-sold" id="detailSold">2,840 sold</span>
+      </div>
+
+      <!-- PRICE BOX -->
+      <div class="price-box">
+        <div class="price-row">
+          <span class="detail-price" id="detailPrice">$24.99</span>
+          <span class="detail-old-price" id="detailOldPrice"></span>
+          <span class="detail-save-badge" id="detailSaveBadge" style="display:none"></span>
+        </div>
+        <p class="price-note">Includes free gift wrapping & ribbon 🎀</p>
+        <div class="stock-badge" id="stockBadge">
+          ✅ In stock — <span id="stockCount">28</span> available
+        </div>
+      </div>
+
+      <!-- QUANTITY -->
+      <p class="section-label">Select quantity</p>
+      <div class="qty-row">
+        <div class="qty-ctrl">
+          <button class="qty-btn" onclick="changeQty(-1)">−</button>
+          <div class="qty-val" id="qtyVal">1</div>
+          <button class="qty-btn" onclick="changeQty(1)">+</button>
+        </div>
+        <span class="qty-note">Max 20 per order</span>
+      </div>
+
+      <!-- ACTION BUTTONS -->
+      <div class="btn-row">
+        <button class="btn-atc" onclick="addToCartDetail()">
+          🛒 Add to cart
+        </button>
+        <button class="btn-wish" id="wishBtn" onclick="toggleWishDetail()">🤍</button>
+      </div>
+      <button class="btn-buy" onclick="buyNow()">
+        ⚡ Buy now — <span id="buyNowPrice">$24.99</span>
+      </button>
+
+      <!-- DELIVERY CARD -->
+      <div class="delivery-card">
+        <div class="del-icon">🚚</div>
+        <div class="del-info">
+          <strong>Same-day delivery available!</strong>
+          <span>Order before 2:00 PM — arrives today.
+                Free delivery on orders over $50.</span>
+        </div>
+      </div>
+
+      <!-- TABS -->
+      <div class="tabs">
+        <button class="tab active" onclick="switchTab('description', this)">
+          Description
+        </button>
+        <button class="tab" onclick="switchTab('care', this)">
+          Care Tips
+        </button>
+        <button class="tab" onclick="switchTab('reviews', this)">
+          Reviews (<span id="reviewCount">312</span>)
+        </button>
+      </div>
+
+      <!-- TAB CONTENT -->
+      <div class="tab-content" id="tabDescription">
+        <p id="detailDescription">Loading description...</p>
+      </div>
+
+      <div class="tab-content" id="tabCare" style="display:none">
+        <ul class="care-list">
+          <li>🌊 Change water every 2 days</li>
+          <li>✂️ Trim stems at an angle every 2–3 days</li>
+          <li>☀️ Keep away from direct sunlight</li>
+          <li>❄️ Store in a cool room (15–20°C is ideal)</li>
+          <li>🧪 Use the flower food sachet provided</li>
+          <li>🍎 Keep away from fruits (ethylene gas)</li>
+        </ul>
+      </div>
+
+      <div class="tab-content" id="tabReviews" style="display:none">
+        <div class="review-card">
+          <div class="reviewer-info">
+            <div class="reviewer-avatar">AK</div>
+            <div>
+              <strong>Amaya K.</strong>
+              <span class="stars" style="font-size:12px">★★★★★</span>
+            </div>
+          </div>
+          <p class="review-text">
+            "Absolutely beautiful! The roses arrived fresh and perfectly
+             arranged. My mother loved them for her birthday!"
+          </p>
+        </div>
+        <div class="review-card">
+          <div class="reviewer-info">
+            <div class="reviewer-avatar">NP</div>
+            <div>
+              <strong>Nimal P.</strong>
+              <span class="stars" style="font-size:12px">★★★★★</span>
+            </div>
+          </div>
+          <p class="review-text">
+            "Delivered within 2 hours! The flowers were even more beautiful
+             in person. Will definitely order again."
+          </p>
+        </div>
+        <div class="review-card">
+          <div class="reviewer-info">
+            <div class="reviewer-avatar">SR</div>
+            <div>
+              <strong>Sithumi R.</strong>
+              <span class="stars" style="font-size:12px">★★★★☆</span>
+            </div>
+          </div>
+          <p class="review-text">
+            "Great quality and packaging. The gift wrapping was a lovely
+             touch. Stayed fresh for over a week!"
+          </p>
+        </div>
+      </div>
+
+      <!-- OCCASION TAGS -->
+      <div class="occasion-tags" id="occasionTags">
+        <!-- injected by JS -->
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-strip">
+      <p>📧 Get fresh flower deals in your inbox!</p>
+      <div class="footer-strip-right">
+        <input type="email" placeholder="Your email address..."/>
+        <button>Subscribe</button>
+      </div>
+    </div>
+    <div class="footer-main">
+      <div class="footer-brand">
+        <a href="#" class="logo"
+           style="text-decoration:none;display:flex;align-items:center;gap:8px;">
+          <div class="logo-icon">🌸</div>
+          <div class="logo-text">Petal<span>Shop</span></div>
+        </a>
+        <p>Sri Lanka's favourite online flower shop. Hand-picked,
+           farm-fresh flowers for every occasion.</p>
+        <div class="footer-socials">
+          <a href="#">f</a><a href="#">in</a>
+          <a href="#">tw</a><a href="#">yt</a>
+        </div>
+        <div class="footer-contact">
+          <span>📞 +94 11 234 5678</span>
+          <span>📧 hello@petalshop.lk</span>
+          <span>📍 45 Flower Lane, Colombo 03</span>
+          <span>🕐 Mon–Sat: 8 AM – 8 PM</span>
+        </div>
+      </div>
+      <div class="footer-col"><h4>Shop</h4><ul>
+        <li><a href="#">› All flowers</a></li>
+        <li><a href="#">› Roses</a></li>
+        <li><a href="#">› Sunflowers</a></li>
+        <li><a href="#">› Tulips</a></li>
+        <li><a href="#">› Bouquets</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Help</h4><ul>
+        <li><a href="#">› My account</a></li>
+        <li><a href="#">› Track order</a></li>
+        <li><a href="#">› Delivery info</a></li>
+        <li><a href="#">› Returns</a></li>
+        <li><a href="#">› FAQs</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Company</h4><ul>
+        <li><a href="#">› About us</a></li>
+        <li><a href="#">› Our florists</a></li>
+        <li><a href="#">› Blog</a></li>
+        <li><a href="#">› Careers</a></li>
+        <li><a href="#">› Sitemap</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-trust">
+      <div class="trust-item">
+        <div class="trust-icon">🚚</div>
+        <div><strong>Same-day delivery</strong><span>Order before 2 PM</span></div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">🌿</div>
+        <div><strong>100% fresh</strong><span>Or replace free</span></div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">🔒</div>
+        <div><strong>Secure checkout</strong><span>256-bit SSL</span></div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">🎁</div>
+        <div><strong>Free gift wrap</strong><span>Every order</span></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 <b>PetalShop</b>. All rights reserved.
+         Made with love in Sri Lanka.</p>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Cookies</a>
+      </div>
+      <div class="footer-payments">
+        <span class="pay-badge">VISA</span>
+        <span class="pay-badge">MC</span>
+        <span class="pay-badge">PayPal</span>
+        <span class="pay-badge">Cash</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JS files — products.js first (has allProducts data) -->
+  <script src="../js/products.js"></script>
+  <script src="../js/product-detail.js"></script>
+
+</body>
+</html>
