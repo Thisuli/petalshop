@@ -339,3 +339,37 @@
   color: #888;
   font-size: 16px;
 }
+
+/* ================================
+   PRODUCT IMAGE STYLES
+================================ */
+
+/* Real product image */
+.product-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* fills the box, keeps proportions */
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+/* Zoom effect on hover */
+.product-card:hover .product-img {
+  transform: scale(1.05);
+}
+
+/* Emoji fallback (if image doesn't load) */
+.product-emoji-fallback {
+  font-size: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+/* Make image box clip the zoom effect */
+.product-img-box {
+  overflow: hidden;
+  position: relative;
+}

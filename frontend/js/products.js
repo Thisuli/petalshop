@@ -1,10 +1,7 @@
 // ================================
 // PETALSHOP — PRODUCTS PAGE JS
+// Now with real images!
 // ================================
-
-// ---- DEMO PRODUCT DATA (JSON) ----
-// This is our demo data — later we'll
-// fetch this from the real backend API
 
 const allProducts = [
   {
@@ -17,10 +14,12 @@ const allProducts = [
     reviews: 312,
     badge: "Popular",
     badgeType: "badge-pop",
+    image: "../images/rose-red.jpg",
     emoji: "🌹",
     bgColor: "#FFF0F3",
     stock: 28,
-    occasion: ["Birthday", "Anniversary", "Romance"]
+    occasion: ["Birthday", "Anniversary", "Romance"],
+    description: "Our premium Red Rose Bouquet features 12 hand-selected, long-stem red roses. Perfect for birthdays, anniversaries, or just to say I love you. Freshly cut and arranged by our expert florists, guaranteed fresh for 7+ days."
   },
   {
     id: 2,
@@ -32,10 +31,12 @@ const allProducts = [
     reviews: 145,
     badge: "New",
     badgeType: "badge-new",
+    image: "../images/rose-white.jpg",
     emoji: "🌹",
     bgColor: "#FFF5F5",
     stock: 15,
-    occasion: ["Wedding", "Anniversary"]
+    occasion: ["Wedding", "Anniversary"],
+    description: "Elegant white roses symbolizing purity and new beginnings. Perfect for weddings and anniversaries. Each stem is hand-picked and arranged beautifully."
   },
   {
     id: 3,
@@ -47,10 +48,12 @@ const allProducts = [
     reviews: 89,
     badge: "New",
     badgeType: "badge-new",
+    image: "../images/sunflower.jpg",
     emoji: "🌻",
     bgColor: "#FFFBEB",
     stock: 4,
-    occasion: ["Birthday"]
+    occasion: ["Birthday"],
+    description: "Bright and cheerful sunflower arrangement that brings sunshine into any room. These gorgeous sunflowers will brighten anyone's day instantly."
   },
   {
     id: 4,
@@ -62,10 +65,12 @@ const allProducts = [
     reviews: 201,
     badge: "Sale",
     badgeType: "badge-sale",
+    image: "../images/tulip-pink.jpg",
     emoji: "🌷",
     bgColor: "#F0FFF4",
     stock: 12,
-    occasion: ["Birthday", "Romance"]
+    occasion: ["Birthday", "Romance"],
+    description: "Beautiful bundle of 20 fresh pink tulips. These delicate blooms are perfect for romantic occasions and birthdays. Stay fresh for 7+ days."
   },
   {
     id: 5,
@@ -77,10 +82,12 @@ const allProducts = [
     reviews: 158,
     badge: null,
     badgeType: null,
+    image: "../images/bouquet-spring.jpg",
     emoji: "💐",
     bgColor: "#FFF8E1",
     stock: 20,
-    occasion: ["Birthday", "Wedding"]
+    occasion: ["Birthday", "Wedding"],
+    description: "A gorgeous mix of seasonal spring flowers hand-arranged into a stunning bouquet. Every bouquet is unique and full of vibrant color."
   },
   {
     id: 6,
@@ -92,10 +99,12 @@ const allProducts = [
     reviews: 87,
     badge: "Sale",
     badgeType: "badge-sale",
+    image: "../images/bouquet-luxury.jpg",
     emoji: "🎁",
     bgColor: "#FFF0E6",
     stock: 8,
-    occasion: ["Anniversary", "Wedding"]
+    occasion: ["Anniversary", "Wedding"],
+    description: "Our most premium bouquet for the most special occasions. Luxurious flowers beautifully arranged with premium wrapping and ribbon."
   },
   {
     id: 7,
@@ -107,10 +116,12 @@ const allProducts = [
     reviews: 445,
     badge: "Popular",
     badgeType: "badge-pop",
+    image: "../images/cherry-blossom.jpg",
     emoji: "🌸",
     bgColor: "#FFF0F8",
     stock: 16,
-    occasion: ["Birthday", "Romance"]
+    occasion: ["Birthday", "Romance"],
+    description: "Our limited seasonal cherry blossom arrangement. Delicate and breathtaking, these blossoms are available for a short time only. Order now!"
   },
   {
     id: 8,
@@ -122,10 +133,12 @@ const allProducts = [
     reviews: 73,
     badge: null,
     badgeType: null,
+    image: "../images/daisy-white.jpg",
     emoji: "🌼",
     bgColor: "#F0F8FF",
     stock: 22,
-    occasion: ["Sympathy", "Birthday"]
+    occasion: ["Sympathy", "Birthday"],
+    description: "A charming box of fresh white daisies. Simple, pure, and elegant. Perfect for brightening up any space or sending as a sympathy gift."
   }
 ];
 
@@ -134,23 +147,18 @@ let currentCategory = 'all';
 let currentMaxPrice = 100;
 let currentSort     = 'featured';
 
-// ---- RENDER PRODUCTS FUNCTION ----
-// This builds the product cards and puts them on the page
-
+// ---- RENDER PRODUCTS ----
 function renderProducts() {
 
-  // Step 1: Filter by category
   let filtered = allProducts.filter(function(product) {
     if (currentCategory === 'all') return true;
     return product.category === currentCategory;
   });
 
-  // Step 2: Filter by price
   filtered = filtered.filter(function(product) {
     return product.price <= currentMaxPrice;
   });
 
-  // Step 3: Sort
   if (currentSort === 'price-low') {
     filtered.sort((a, b) => a.price - b.price);
   } else if (currentSort === 'price-high') {
@@ -159,12 +167,10 @@ function renderProducts() {
     filtered.sort((a, b) => b.rating - a.rating);
   }
 
-  // Step 4: Get the grid container
   const grid      = document.getElementById('productsGrid');
   const noResults = document.getElementById('noResults');
   const countEl   = document.getElementById('productCount');
 
-  // Step 5: Show no results message if empty
   if (filtered.length === 0) {
     grid.innerHTML = '';
     noResults.style.display = 'block';
@@ -175,10 +181,8 @@ function renderProducts() {
   noResults.style.display = 'none';
   countEl.textContent = filtered.length;
 
-  // Step 6: Build HTML for each product card
   grid.innerHTML = filtered.map(function(product) {
 
-    // Calculate discount percentage if old price exists
     const discountHTML = product.oldPrice
       ? `<span class="product-old-price">$${product.oldPrice.toFixed(2)}</span>
          <span class="product-discount">
@@ -186,27 +190,37 @@ function renderProducts() {
          </span>`
       : '';
 
-    // Badge HTML
     const badgeHTML = product.badge
       ? `<span class="product-badge ${product.badgeType}">${product.badge}</span>`
       : '';
 
-    // Low stock warning
     const lowStockHTML = product.stock <= 5
       ? `<p class="low-stock">⚠️ Only ${product.stock} left!</p>`
       : '';
 
-    // Stars (filled based on rating)
-    const fullStars  = Math.floor(product.rating);
-    const starsHTML  = '★'.repeat(fullStars) + '☆'.repeat(5 - fullStars);
+    const fullStars = Math.floor(product.rating);
+    const starsHTML = '★'.repeat(fullStars) + '☆'.repeat(5 - fullStars);
 
-    // Return the full card HTML
     return `
       <div class="product-card" onclick="goToDetail(${product.id})">
         <div class="product-img-box" style="background:${product.bgColor}">
-          ${product.emoji}
+
+          <!-- REAL IMAGE — with emoji fallback if image not found -->
+          <img
+            src="${product.image}"
+            alt="${product.name}"
+            class="product-img"
+            onerror="this.style.display='none';
+                     this.nextElementSibling.style.display='flex'"
+          />
+          <!-- Emoji fallback (shown if image fails to load) -->
+          <div class="product-emoji-fallback" style="display:none">
+            ${product.emoji}
+          </div>
+
           ${badgeHTML}
-          <button class="wishlist-btn" onclick="toggleWishlist(event, ${product.id})">🤍</button>
+          <button class="wishlist-btn"
+            onclick="toggleWishlist(event, ${product.id})">🤍</button>
         </div>
         <div class="product-info">
           <p class="product-category">${product.category}</p>
@@ -234,21 +248,15 @@ function renderProducts() {
 function filterByCategory(category, clickedElement) {
   currentCategory = category;
 
-  // Update active class on pills (hero bar)
   document.querySelectorAll('.pill').forEach(function(pill) {
     pill.classList.remove('active');
   });
-
-  // Update active class on sidebar items
   document.querySelectorAll('.sb-item').forEach(function(item) {
     item.classList.remove('active');
   });
-
-  // Add active to clicked element
   if (clickedElement) {
     clickedElement.classList.add('active');
   }
-
   renderProducts();
 }
 
@@ -256,50 +264,40 @@ function filterByCategory(category, clickedElement) {
 function filterByPrice(value) {
   currentMaxPrice = parseFloat(value);
   const display = document.getElementById('priceDisplay');
-  if (display) {
-    display.textContent = `$0 – $${currentMaxPrice}`;
-  }
+  if (display) display.textContent = `$0 – $${currentMaxPrice}`;
   renderProducts();
 }
 
-// ---- SORT PRODUCTS ----
+// ---- SORT ----
 function sortProducts(value) {
   currentSort = value;
   renderProducts();
 }
 
-// ---- GO TO PRODUCT DETAIL ----
+// ---- GO TO DETAIL ----
 function goToDetail(productId) {
-  // Save the selected product ID to localStorage
-  // so the detail page knows which product to show
   localStorage.setItem('selectedProductId', productId);
   window.location.href = 'product-detail.html';
 }
 
 // ---- ADD TO CART ----
 function addToCart(event, productId) {
-  // Stop the click from also triggering goToDetail
   event.stopPropagation();
 
-  // Find the product
   const product = allProducts.find(p => p.id === productId);
   if (!product) return;
 
-  // Get existing cart from localStorage (or empty array)
   let cart = JSON.parse(localStorage.getItem('petalshop_cart')) || [];
-
-  // Check if product already in cart
   const existingItem = cart.find(item => item.id === productId);
 
   if (existingItem) {
-    // Increase quantity
     existingItem.quantity += 1;
   } else {
-    // Add new item to cart
     cart.push({
       id:       product.id,
       name:     product.name,
       price:    product.price,
+      image:    product.image,
       emoji:    product.emoji,
       bgColor:  product.bgColor,
       category: product.category,
@@ -307,18 +305,16 @@ function addToCart(event, productId) {
     });
   }
 
-  // Save updated cart back to localStorage
   localStorage.setItem('petalshop_cart', JSON.stringify(cart));
-
-  // Update cart count in navbar
   updateCartCount();
 
-  // Show a small confirmation (change button text briefly)
   event.target.textContent = '✓ Added!';
   event.target.style.background = '#22C55E';
+  event.target.style.color = '#fff';
   setTimeout(function() {
     event.target.textContent = 'Add to cart';
     event.target.style.background = '';
+    event.target.style.color = '';
   }, 1500);
 }
 
@@ -326,23 +322,18 @@ function addToCart(event, productId) {
 function toggleWishlist(event, productId) {
   event.stopPropagation();
   const btn = event.target;
-  if (btn.textContent === '🤍') {
-    btn.textContent = '❤️';
-  } else {
-    btn.textContent = '🤍';
-  }
+  btn.textContent = btn.textContent === '🤍' ? '❤️' : '🤍';
 }
 
-// ---- UPDATE CART COUNT IN NAVBAR ----
+// ---- UPDATE CART COUNT ----
 function updateCartCount() {
-  const cart     = JSON.parse(localStorage.getItem('petalshop_cart')) || [];
-  const total    = cart.reduce((sum, item) => sum + item.quantity, 0);
-  const countEl  = document.getElementById('cartCount');
+  const cart    = JSON.parse(localStorage.getItem('petalshop_cart')) || [];
+  const total   = cart.reduce((sum, item) => sum + item.quantity, 0);
+  const countEl = document.getElementById('cartCount');
   if (countEl) countEl.textContent = total;
 }
 
-// ---- ON PAGE LOAD ----
-// Render products and update cart count when page loads
+// ---- PAGE LOAD ----
 document.addEventListener('DOMContentLoaded', function() {
   renderProducts();
   updateCartCount();
