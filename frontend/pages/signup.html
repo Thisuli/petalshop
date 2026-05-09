@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PetalShop — Sign Up</title>
+  <link rel="stylesheet" href="../css/style.css"/>
+  <link rel="stylesheet" href="../css/signup.css"/>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a href="products.html" class="logo">
+      <div class="logo-icon">🌸</div>
+      <div class="logo-text">Petal<span>Shop</span></div>
+    </a>
+    <a href="products.html" class="nav-link">Home</a>
+    <a href="products.html" class="nav-link">Flowers</a>
+    <a href="products.html" class="nav-link">Bouquets</a>
+    <a href="login.html" class="nav-link">Already a member? Sign in</a>
+  </nav>
+
+  <!-- MAIN BODY -->
+  <main class="signup-main">
+
+    <!-- LEFT SIDEBAR — Steps -->
+    <div class="signup-sidebar">
+      <p class="steps-title">Registration steps</p>
+
+      <div class="step-item">
+        <div class="step-circle done">✓</div>
+        <div class="step-info">
+          <strong class="done">Choose role</strong>
+          <span>Completed</span>
+        </div>
+      </div>
+      <div class="step-line done"></div>
+
+      <div class="step-item">
+        <div class="step-circle active">2</div>
+        <div class="step-info">
+          <strong class="active">Your details</strong>
+          <span>Current step</span>
+        </div>
+      </div>
+      <div class="step-line"></div>
+
+      <div class="step-item">
+        <div class="step-circle todo">3</div>
+        <div class="step-info">
+          <strong class="todo">Verify email</strong>
+          <span>Almost done</span>
+        </div>
+      </div>
+
+      <div class="tip-box">
+        <strong>🌸 Did you know?</strong>
+        <p>PetalShop delivers fresh flowers within 3 hours of your order!</p>
+      </div>
+    </div>
+
+    <!-- RIGHT MAIN FORM -->
+    <div class="signup-form-area">
+      <div class="form-tag">Create account 🌼</div>
+      <h2 class="form-title">Join PetalShop today</h2>
+      <p class="form-sub">Fresh flowers, delivered to your door</p>
+
+      <!-- ROLE SELECTOR -->
+      <p class="field-label">I am registering as</p>
+      <div class="role-row">
+        <div class="role-card selected" id="roleCustomer" onclick="selectRole('user')">
+          <div class="role-icon">🛍️</div>
+          <strong>Customer</strong>
+          <span>Browse and buy flowers</span>
+        </div>
+        <div class="role-card" id="roleAdmin" onclick="selectRole('admin')">
+          <div class="role-icon">🌿</div>
+          <strong>Admin</strong>
+          <span>Manage products</span>
+        </div>
+      </div>
+
+      <!-- SIGNUP FORM -->
+      <form id="signupForm">
+
+        <!-- Hidden field to store selected role -->
+        <input type="hidden" id="selectedRole" value="user"/>
+
+        <div class="grid-2">
+          <div class="field-group">
+            <label for="firstName">First name</label>
+            <input type="text" id="firstName" placeholder="First name" required/>
+            <span class="field-hint" id="firstNameHint"></span>
+          </div>
+          <div class="field-group">
+            <label for="lastName">Last name</label>
+            <input type="text" id="lastName" placeholder="Last name" required/>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label for="email">Email address</label>
+          <input type="email" id="email" placeholder="Enter your email" required/>
+          <span class="field-hint" id="emailHint"></span>
+        </div>
+
+        <div class="field-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="Create a password" required/>
+          <!-- Password strength bars -->
+          <div class="strength-bars">
+            <div class="bar" id="bar1"></div>
+            <div class="bar" id="bar2"></div>
+            <div class="bar" id="bar3"></div>
+            <div class="bar" id="bar4"></div>
+          </div>
+          <span class="strength-label" id="strengthLabel"></span>
+        </div>
+
+        <div class="field-group">
+          <label for="confirmPassword">Confirm password</label>
+          <input type="password" id="confirmPassword" placeholder="Repeat your password" required/>
+          <span class="field-hint" id="confirmHint"></span>
+        </div>
+
+        <!-- Error message -->
+        <div class="error-msg" id="errorMsg"></div>
+
+        <!-- Terms checkbox -->
+        <div class="terms-row">
+          <input type="checkbox" id="terms"/>
+          <label for="terms">
+            I agree to PetalShop's
+            <a href="#">Terms of Service</a> and
+            <a href="#">Privacy Policy</a>
+          </label>
+        </div>
+
+        <button type="submit" class="btn-black" style="width:100%; margin-bottom:12px;">
+          Create my PetalShop account 🌸
+        </button>
+
+        <p class="login-note">
+          Already registered? <a href="login.html">Sign in here →</a>
+        </p>
+
+      </form>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-strip">
+      <p>📧 Get fresh flower deals in your inbox!</p>
+      <div class="footer-strip-right">
+        <input type="email" placeholder="Your email address..."/>
+        <button>Subscribe</button>
+      </div>
+    </div>
+    <div class="footer-main">
+      <div class="footer-brand">
+        <a href="#" class="logo" style="text-decoration:none;display:flex;align-items:center;gap:8px;">
+          <div class="logo-icon">🌸</div>
+          <div class="logo-text">Petal<span>Shop</span></div>
+        </a>
+        <p>Sri Lanka's favourite online flower shop. Hand-picked, farm-fresh flowers for every occasion.</p>
+        <div class="footer-socials">
+          <a href="#">f</a><a href="#">in</a><a href="#">tw</a><a href="#">yt</a>
+        </div>
+        <div class="footer-contact">
+          <span>📞 +94 11 234 5678</span>
+          <span>📧 hello@petalshop.lk</span>
+          <span>📍 45 Flower Lane, Colombo 03</span>
+          <span>🕐 Mon–Sat: 8 AM – 8 PM</span>
+        </div>
+      </div>
+      <div class="footer-col"><h4>Shop</h4><ul><li><a href="#">› All flowers</a></li><li><a href="#">› Roses</a></li><li><a href="#">› Sunflowers</a></li><li><a href="#">› Tulips</a></li><li><a href="#">› Bouquets</a></li></ul></div>
+      <div class="footer-col"><h4>Help</h4><ul><li><a href="#">› My account</a></li><li><a href="#">› Track order</a></li><li><a href="#">› Delivery info</a></li><li><a href="#">› Returns</a></li><li><a href="#">› FAQs</a></li></ul></div>
+      <div class="footer-col"><h4>Company</h4><ul><li><a href="#">› About us</a></li><li><a href="#">› Our florists</a></li><li><a href="#">› Blog</a></li><li><a href="#">› Careers</a></li><li><a href="#">› Sitemap</a></li></ul></div>
+    </div>
+    <div class="footer-trust">
+      <div class="trust-item"><div class="trust-icon">🚚</div><div><strong>Same-day delivery</strong><span>Order before 2 PM</span></div></div>
+      <div class="trust-item"><div class="trust-icon">🌿</div><div><strong>100% fresh</strong><span>Or replace free</span></div></div>
+      <div class="trust-item"><div class="trust-icon">🔒</div><div><strong>Secure checkout</strong><span>256-bit SSL</span></div></div>
+      <div class="trust-item"><div class="trust-icon">🎁</div><div><strong>Free gift wrap</strong><span>Every order</span></div></div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 <b>PetalShop</b>. All rights reserved. Made with love in Sri Lanka.</p>
+      <div class="footer-bottom-links"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">Cookies</a></div>
+      <div class="footer-payments"><span class="pay-badge">VISA</span><span class="pay-badge">MC</span><span class="pay-badge">PayPal</span><span class="pay-badge">Cash</span></div>
+    </div>
+  </footer>
+
+  <script src="../js/auth.js"></script>
+
+</body>
+</html>
