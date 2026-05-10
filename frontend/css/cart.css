@@ -1,0 +1,417 @@
+/* ================================
+   CART PAGE STYLES
+================================ */
+
+/* Page header */
+.cart-header {
+  background: var(--white);
+  border-bottom: 1px solid #f0f0f0;
+  padding: 16px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.cart-header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.cart-header-left h2 {
+  color: var(--black);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+/* Item count pill */
+.item-pill {
+  background: var(--yellow);
+  color: var(--black);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 3px 12px;
+  border-radius: 20px;
+}
+
+.cart-header-note {
+  color: #666;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* Main layout */
+.cart-body {
+  display: flex;
+  gap: 20px;
+  padding: 20px 40px;
+  background: #F5F5F5;
+  min-height: calc(100vh - 120px);
+  align-items: flex-start;
+}
+
+/* Left column */
+.cart-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Stock warning banner */
+.stock-warn {
+  background: var(--yellow-light);
+  border: 1.5px solid var(--yellow);
+  border-radius: 10px;
+  padding: 10px 16px;
+  color: #7a6000;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* Empty cart */
+.empty-cart {
+  background: var(--white);
+  border: 1px solid #f0f0f0;
+  border-radius: 14px;
+  padding: 60px 40px;
+  text-align: center;
+}
+.empty-icon  { font-size: 60px; margin-bottom: 16px; }
+.empty-cart h3 { color: var(--black); font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+.empty-cart p  { color: #888; font-size: 14px; }
+
+/* Cart item card */
+.cart-card {
+  background: var(--white);
+  border: 1px solid #f0f0f0;
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  transition: border-color 0.2s;
+}
+.cart-card:hover { border-color: var(--yellow); }
+
+/* Product image in cart */
+.cart-img-box {
+  width: 72px;
+  height: 72px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+  border: 1px solid #f0f0f0;
+}
+.cart-img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 9px;
+}
+.cart-img-emoji { font-size: 30px; }
+
+/* Product info in cart */
+.cart-item-info { flex: 1; }
+
+.cart-item-cat {
+  color: var(--yellow-dark);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  margin-bottom: 3px;
+}
+
+.cart-item-name {
+  color: var(--black);
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  line-height: 1.3;
+}
+
+.cart-item-meta {
+  color: #aaa;
+  font-size: 11px;
+  margin-bottom: 10px;
+}
+
+/* Actions row inside cart card */
+.cart-item-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Quantity control */
+.qty-ctrl {
+  display: flex;
+  align-items: center;
+  border: 1.5px solid #ddd;
+  border-radius: 7px;
+  overflow: hidden;
+}
+.qty-btn {
+  width: 30px;
+  height: 30px;
+  background: var(--white);
+  border: none;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  color: var(--black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+  font-family: 'Poppins', sans-serif;
+}
+.qty-btn:hover { background: var(--yellow-light); }
+
+.qty-val {
+  width: 36px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--black);
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+}
+
+/* Remove button */
+.btn-remove {
+  color: var(--red);
+  font-size: 12px;
+  font-weight: 700;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0;
+}
+.btn-remove:hover { text-decoration: underline; }
+
+/* Save button */
+.btn-save-wish {
+  color: var(--black);
+  font-size: 12px;
+  font-weight: 600;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0;
+}
+.btn-save-wish:hover { color: var(--yellow-dark); }
+
+/* Price on right of cart card */
+.cart-item-price { text-align: right; flex-shrink: 0; }
+
+.cart-price-main {
+  color: var(--black);
+  font-size: 16px;
+  font-weight: 700;
+  display: block;
+}
+.cart-price-each {
+  color: #aaa;
+  font-size: 11px;
+  display: block;
+  margin-top: 2px;
+}
+.cart-price-saved {
+  color: #16A34A;
+  font-size: 11px;
+  font-weight: 700;
+  display: block;
+  margin-top: 2px;
+}
+
+/* ─── RIGHT SIDEBAR ─── */
+.cart-right {
+  width: 260px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Summary card */
+.summary-card {
+  background: var(--white);
+  border: 1px solid #f0f0f0;
+  border-radius: 12px;
+  padding: 18px;
+}
+
+.summary-title {
+  color: var(--black);
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--yellow);
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 13px;
+}
+.summary-row span   { color: #666; }
+.summary-row strong { color: var(--black); font-weight: 700; }
+
+.summary-divider {
+  border: none;
+  border-top: 1px solid #f0f0f0;
+  margin: 12px 0;
+}
+
+.summary-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+.summary-total span   { color: var(--black); font-size: 15px; font-weight: 700; }
+.summary-total strong { color: var(--black); font-size: 20px; font-weight: 700; }
+
+/* Savings note */
+.savings-note {
+  background: #F0FFF4;
+  border: 1px solid #BBF7D0;
+  border-radius: 7px;
+  padding: 7px 10px;
+  margin: 10px 0;
+  color: #16A34A;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* Checkout button */
+.btn-checkout {
+  display: block;
+  width: 100%;
+  background: var(--yellow);
+  color: var(--black);
+  border: none;
+  border-radius: 8px;
+  padding: 13px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+  text-decoration: none;
+  margin-bottom: 8px;
+  transition: background 0.2s;
+  box-sizing: border-box;
+}
+.btn-checkout:hover { background: #e6b800; }
+
+/* Continue shopping */
+.btn-continue {
+  display: block;
+  width: 100%;
+  background: var(--black);
+  color: var(--yellow);
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+  text-decoration: none;
+  transition: opacity 0.2s;
+  box-sizing: border-box;
+}
+.btn-continue:hover { opacity: 0.85; }
+
+/* Promo code card */
+.promo-card {
+  background: var(--white);
+  border: 1px solid #f0f0f0;
+  border-radius: 12px;
+  padding: 14px;
+}
+.promo-label {
+  color: var(--black);
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.promo-row {
+  display: flex;
+  gap: 8px;
+}
+.promo-row input {
+  flex: 1;
+  background: #FAFAFA;
+  border: 1.5px solid #E5E5E5;
+  border-radius: 7px;
+  padding: 8px 12px;
+  font-size: 12px;
+  font-family: 'Poppins', sans-serif;
+  color: var(--black);
+  outline: none;
+}
+.promo-row input:focus { border-color: var(--yellow); }
+.promo-row button {
+  background: var(--black);
+  color: var(--yellow);
+  border: none;
+  border-radius: 7px;
+  padding: 8px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+}
+.promo-msg {
+  font-size: 11px;
+  margin-top: 6px;
+  height: 14px;
+  font-weight: 600;
+}
+.promo-msg.ok { color: #16A34A; }
+.promo-msg.er { color: var(--red); }
+
+/* Trust mini card */
+.trust-mini-card {
+  background: var(--yellow-light);
+  border: 1px solid var(--yellow);
+  border-radius: 12px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.trust-mini-item {
+  color: #555;
+  font-size: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
