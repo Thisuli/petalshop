@@ -1,198 +1,191 @@
 // ================================
-// PETALSHOP — PRODUCT DETAIL JS
+// PRODUCT DETAIL — EXACT FIGMA JS
 // ================================
 
-// Current quantity selected
-let quantity = 1;
-
-// The product being viewed
+let quantity       = 1;
 let currentProduct = null;
 
-// ---- LOAD PRODUCT ON PAGE START ----
-document.addEventListener('DOMContentLoaded', function() {
+// Thumbnail emoji fallbacks
+const thumbFallbacks = ['🌹','📦','🎀','🌿'];
 
-  // Update cart count in navbar
+document.addEventListener('DOMContentLoaded', function () {
   updateCartCount();
 
-  // Get the product ID saved by the products page
-  const productId = parseInt(localStorage.getItem('selectedProductId'));
+  const productId  = parseInt(localStorage.getItem('selectedProductId'));
+  currentProduct   = allProducts.find(p => p.id === productId);
 
-  // Find the product from our data (in products.js)
-  currentProduct = allProducts.find(p => p.id === productId);
-
-  // If no product found, go back to products page
   if (!currentProduct) {
     window.location.href = 'products.html';
     return;
   }
 
-  // Now fill in all the page details
   loadProductDetails(currentProduct);
 });
 
-// ---- FILL PAGE WITH PRODUCT DATA ----
-function loadProductDetails(product) {
+// ─────────────────────────────────────────
+function loadProductDetails(p) {
 
-  // --- BREADCRUMB ---
+  // Page title
+  document.title = `PetalShop — ${p.name}`;
+
+  // Breadcrumb
   document.getElementById('bcCategory').textContent =
-    product.category.charAt(0).toUpperCase() + product.category.slice(1);
-  document.getElementById('bcName').textContent = product.name;
+    p.category.charAt(0).toUpperCase() + p.category.slice(1);
+  document.getElementById('bcName').textContent = p.name;
 
-  // --- MAIN IMAGE ---
+  // Main image
   const mainImg   = document.getElementById('mainImg');
   const mainEmoji = document.getElementById('mainEmoji');
   const mainBox   = document.getElementById('mainImgBox');
 
-  mainBox.style.background = product.bgColor;
-  mainImg.src = product.image;
-  mainImg.alt = product.name;
-  mainEmoji.textContent   = product.emoji;
+  mainBox.style.background = p.bgColor;
+  mainImg.src = p.image;
+  mainImg.alt = p.name;
+  mainEmoji.textContent = p.emoji;
 
-  // --- BADGE ---
-  const badge = document.getElementById('detailBadge');
-  if (product.badge) {
-    badge.textContent = product.badge;
-    badge.style.display = 'inline-block';
-    // Apply badge colour based on type
-    if (product.badgeType === 'badge-pop') {
-      badge.style.background = '#F5C518';
-      badge.style.color      = '#1a1a1a';
-    } else if (product.badgeType === 'badge-new') {
-      badge.style.background = '#1a1a1a';
-      badge.style.color      = '#F5C518';
-    } else if (product.badgeType === 'badge-sale') {
-      badge.style.background = '#EF4444';
-      badge.style.color      = '#ffffff';
-    }
+  // Badges — exactly two like Figma
+  const badgeLeft  = document.getElementById('badgeLeft');
+  const badgeRight = document.getElementById('badgeRight');
+
+  // Always show "New arrival" on left
+  badgeLeft.style.display = 'inline-block';
+
+  // Show "Popular" on right only if badge is Popular
+  if (p.badge === 'Popular') {
+    badgeRight.textContent      = '⭐ Popular';
+    badgeRight.style.display    = 'inline-block';
+    badgeRight.style.background = '#F5C518';
+    badgeRight.style.color      = '#1a1a1a';
+  } else if (p.badge === 'Sale') {
+    badgeRight.textContent      = 'Sale';
+    badgeRight.style.display    = 'inline-block';
+    badgeRight.style.background = '#EF4444';
+    badgeRight.style.color      = '#ffffff';
+  } else if (p.badge === 'New') {
+    badgeRight.textContent      = 'New';
+    badgeRight.style.display    = 'inline-block';
+    badgeRight.style.background = '#22C55E';
+    badgeRight.style.color      = '#ffffff';
   }
 
-  // --- THUMBNAILS ---
-  // We show the main image + 3 extra placeholder thumbs
+  // Thumbnails — 4 boxes like Figma
   const thumbsRow = document.getElementById('thumbsRow');
-  const thumbImages = [
-    { src: product.image, label: 'Main' },
-    { src: product.image, label: 'Side' },
-    { src: product.image, label: 'Detail' },
-    { src: product.image, label: 'Pack' },
-  ];
-
-  thumbsRow.innerHTML = thumbImages.map((thumb, index) => `
-    <div class="thumb ${index === 0 ? 'active' : ''}"
-         onclick="switchMainImage('${thumb.src}', this, '${product.emoji}')">
+  thumbsRow.innerHTML = thumbFallbacks.map((emoji, i) => `
+    <div class="thumb ${i === 0 ? 'active' : ''}"
+         onclick="switchThumb('${p.image}', this, '${emoji}')">
       <img
-        src="${thumb.src}"
-        alt="${thumb.label}"
+        src="${p.image}"
+        alt="view ${i+1}"
         onerror="this.style.display='none';
                  this.nextElementSibling.style.display='flex'"
       />
-      <div class="thumb-emoji" style="display:none">${product.emoji}</div>
+      <div class="thumb-emoji" style="display:none">${emoji}</div>
     </div>
   `).join('');
 
-  // --- CATEGORY ---
-  document.getElementById('detailCat').textContent =
-    product.category.toUpperCase() + ' · Premium Collection';
+  // Category tag
+  document.getElementById('detailCat').innerHTML =
+    `🌹 ${p.category.toUpperCase()} · PREMIUM COLLECTION`;
 
-  // --- TITLE ---
-  document.getElementById('detailTitle').textContent = product.name;
+  // Title
+  document.getElementById('detailTitle').textContent = p.name;
 
-  // --- RATING ---
-  const fullStars = Math.floor(product.rating);
+  // Stars
+  const full = Math.floor(p.rating);
   document.getElementById('detailStars').textContent =
-    '★'.repeat(fullStars) + '☆'.repeat(5 - fullStars);
-  document.getElementById('detailScore').textContent   = product.rating;
+    '★'.repeat(full) + '☆'.repeat(5 - full);
+
+  // Score + reviews
+  document.getElementById('detailScore').textContent   = p.rating;
   document.getElementById('detailReviews').textContent =
-    `(${product.reviews} reviews)`;
-  document.getElementById('reviewCount').textContent   = product.reviews;
+    `(${p.reviews} reviews)`;
+  document.getElementById('reviewCount').textContent   = p.reviews;
 
-  // Fake sold count (10x reviews)
+  // Sold count
   document.getElementById('detailSold').textContent =
-    `${(product.reviews * 10).toLocaleString()} sold`;
+    `${(p.reviews * 9).toLocaleString()} sold`;
 
-  // --- PRICE ---
+  // Price
   document.getElementById('detailPrice').textContent =
-    `$${product.price.toFixed(2)}`;
+    `$${p.price.toFixed(2)}`;
   document.getElementById('buyNowPrice').textContent =
-    `$${product.price.toFixed(2)}`;
+    `$${p.price.toFixed(2)}`;
 
-  if (product.oldPrice) {
+  // Old price + save badge
+  if (p.oldPrice) {
     document.getElementById('detailOldPrice').textContent =
-      `$${product.oldPrice.toFixed(2)}`;
-    const saved = (product.oldPrice - product.price).toFixed(2);
-    const saveBadge = document.getElementById('detailSaveBadge');
-    saveBadge.textContent  = `Save $${saved}`;
-    saveBadge.style.display = 'inline-block';
+      `$${p.oldPrice.toFixed(2)}`;
+    const saved = (p.oldPrice - p.price).toFixed(0);
+    const sb    = document.getElementById('detailSaveBadge');
+    sb.textContent   = `Save $${saved}`;
+    sb.style.display = 'inline-block';
   }
 
-  // --- STOCK ---
-  document.getElementById('stockCount').textContent = product.stock;
-  const stockBadge = document.getElementById('stockBadge');
-  if (product.stock <= 5) {
-    stockBadge.textContent = `⚠️ Only ${product.stock} left — order soon!`;
-    stockBadge.classList.add('low');
+  // Stock
+  document.getElementById('stockCount').textContent = p.stock;
+  if (p.stock <= 5) {
+    const sb = document.getElementById('stockBadge');
+    sb.textContent = `⚠️ Only ${p.stock} left — order soon!`;
+    sb.classList.add('low');
   }
 
-  // --- DESCRIPTION ---
+  // Description
   document.getElementById('detailDescription').textContent =
-    product.description;
+    p.description;
 
-  // --- OCCASION TAGS ---
-  const tagsContainer = document.getElementById('occasionTags');
-  if (product.occasion && product.occasion.length > 0) {
-    // Map of occasion labels to emojis
-    const emojiMap = {
-      'Birthday':    '🎂',
-      'Anniversary': '💍',
-      'Romance':     '💑',
-      'Wedding':     '👰',
-      'Sympathy':    '🕊️',
-    };
-    tagsContainer.innerHTML = product.occasion.map(occ => `
+  // Occasion tags — exactly like Figma
+  const emojiMap = {
+    'Birthday':    '🎂',
+    'Anniversary': '💍',
+    'Romance':     '💑',
+    'Wedding':     '👰',
+    'Sympathy':    '🕊️',
+    'Long-lasting':'🌿',
+    'Gift-ready':  '🎁',
+  };
+
+  // Add Long-lasting and Gift-ready to every product
+  const allTags = [...(p.occasion || []), 'Long-lasting', 'Gift-ready'];
+
+  document.getElementById('occasionTags').innerHTML =
+    allTags.map(tag => `
       <span class="occasion-tag">
-        ${emojiMap[occ] || '🌸'} ${occ}
+        ${emojiMap[tag] || '🌸'} ${tag}
       </span>
     `).join('');
-  }
-
-  // --- PAGE TITLE ---
-  document.title = `PetalShop — ${product.name}`;
 }
 
-// ---- SWITCH MAIN IMAGE (when thumbnail clicked) ----
-function switchMainImage(src, thumbEl, emoji) {
-
-  // Update main image
+// ─── Switch thumbnail ───────────────────
+function switchThumb(src, el, emoji) {
   const mainImg   = document.getElementById('mainImg');
   const mainEmoji = document.getElementById('mainEmoji');
-  mainImg.src     = src;
-  mainImg.style.display = 'block';
+
+  mainImg.src = src;
+  mainImg.style.display   = 'block';
   mainEmoji.style.display = 'none';
 
-  // Update active thumbnail
-  document.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
-  thumbEl.classList.add('active');
+  document.querySelectorAll('.thumb')
+    .forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
 }
 
-// ---- QUANTITY CONTROL ----
+// ─── Quantity ───────────────────────────
 function changeQty(change) {
-  quantity = quantity + change;
-
-  // Min 1, max 20
+  quantity += change;
   if (quantity < 1)  quantity = 1;
   if (quantity > 20) quantity = 20;
-
   document.getElementById('qtyVal').textContent = quantity;
 }
 
-// ---- ADD TO CART FROM DETAIL PAGE ----
+// ─── Add to cart ────────────────────────
 function addToCartDetail() {
   if (!currentProduct) return;
 
   let cart = JSON.parse(localStorage.getItem('petalshop_cart')) || [];
-  const existingItem = cart.find(item => item.id === currentProduct.id);
+  const existing = cart.find(i => i.id === currentProduct.id);
 
-  if (existingItem) {
-    existingItem.quantity += quantity;
+  if (existing) {
+    existing.quantity += quantity;
   } else {
     cart.push({
       id:       currentProduct.id,
@@ -211,29 +204,31 @@ function addToCartDetail() {
 
   // Button feedback
   const btn = document.querySelector('.btn-atc');
-  btn.textContent = '✓ Added to cart!';
+  const orig = btn.innerHTML;
+  btn.innerHTML  = '✓ Added to cart!';
   btn.style.background = '#22C55E';
-  btn.style.color = '#fff';
-  setTimeout(function() {
-    btn.textContent = '🛒 Add to cart';
+  btn.style.color      = '#fff';
+  btn.style.border     = '1.5px solid #22C55E';
+  setTimeout(() => {
+    btn.innerHTML        = orig;
     btn.style.background = '';
-    btn.style.color = '';
+    btn.style.color      = '';
+    btn.style.border     = '';
   }, 2000);
 }
 
-// ---- BUY NOW ----
+// ─── Buy now ────────────────────────────
 function buyNow() {
-  // Add to cart first then go to checkout
   addToCartDetail();
-  setTimeout(function() {
+  setTimeout(() => {
     window.location.href = 'checkout.html';
-  }, 500);
+  }, 400);
 }
 
-// ---- TOGGLE WISHLIST ----
+// ─── Wishlist ───────────────────────────
 function toggleWishDetail() {
   const btn = document.getElementById('wishBtn');
-  if (btn.textContent === '🤍') {
+  if (btn.textContent.trim() === '🤍') {
     btn.textContent = '❤️';
     btn.classList.add('active');
   } else {
@@ -242,34 +237,26 @@ function toggleWishDetail() {
   }
 }
 
-// ---- SWITCH TABS ----
-function switchTab(tabName, clickedBtn) {
+// ─── Tabs ───────────────────────────────
+function switchTab(name, btn) {
+  ['tabDescription','tabCare','tabReviews'].forEach(id => {
+    document.getElementById(id).style.display = 'none';
+  });
+  document.querySelectorAll('.tab')
+    .forEach(t => t.classList.remove('active'));
 
-  // Hide all tab content panels
-  document.getElementById('tabDescription').style.display = 'none';
-  document.getElementById('tabCare').style.display        = 'none';
-  document.getElementById('tabReviews').style.display     = 'none';
+  document.getElementById(
+    name === 'description' ? 'tabDescription' :
+    name === 'care'        ? 'tabCare'        : 'tabReviews'
+  ).style.display = 'block';
 
-  // Remove active from all tab buttons
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-
-  // Show the selected tab
-  if (tabName === 'description') {
-    document.getElementById('tabDescription').style.display = 'block';
-  } else if (tabName === 'care') {
-    document.getElementById('tabCare').style.display = 'block';
-  } else if (tabName === 'reviews') {
-    document.getElementById('tabReviews').style.display = 'block';
-  }
-
-  // Mark clicked button as active
-  clickedBtn.classList.add('active');
+  btn.classList.add('active');
 }
 
-// ---- UPDATE CART COUNT ----
+// ─── Cart count ─────────────────────────
 function updateCartCount() {
-  const cart    = JSON.parse(localStorage.getItem('petalshop_cart')) || [];
-  const total   = cart.reduce((sum, item) => sum + item.quantity, 0);
-  const countEl = document.getElementById('cartCount');
-  if (countEl) countEl.textContent = total;
+  const cart  = JSON.parse(localStorage.getItem('petalshop_cart')) || [];
+  const total = cart.reduce((s, i) => s + i.quantity, 0);
+  const el    = document.getElementById('cartCount');
+  if (el) el.textContent = total;
 }
