@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PetalShop — Checkout</title>
+  <link rel="stylesheet" href="../css/style.css"/>
+  <link rel="stylesheet" href="../css/checkout.css"/>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a href="products.html" class="logo">
+      <div class="logo-icon">🌸</div>
+      <div class="logo-text">Petal<span>Shop</span></div>
+    </a>
+    <div style="flex:1"></div>
+    <span style="color:#F5C518;font-size:13px;font-weight:700;">
+      🔒 Secure checkout — 256-bit SSL
+    </span>
+  </nav>
+
+  <!-- STEPS BAR -->
+  <div class="steps-bar">
+    <div class="step">
+      <div class="sc done">✓</div>
+      <span class="step-label done">Cart</span>
+    </div>
+    <div class="step-line done"></div>
+    <div class="step">
+      <div class="sc active">2</div>
+      <span class="step-label active">Checkout</span>
+    </div>
+    <div class="step-line todo"></div>
+    <div class="step">
+      <div class="sc todo">3</div>
+      <span class="step-label todo">Confirmation</span>
+    </div>
+  </div>
+
+  <!-- MAIN BODY -->
+  <div class="checkout-body">
+
+    <!-- LEFT: FORMS -->
+    <div class="checkout-left">
+
+      <!-- 1. Shipping Address -->
+      <div class="section-card">
+        <div class="sec-head">
+          <div class="sec-num">1</div>
+          <div class="sec-title">📦 Shipping address</div>
+        </div>
+
+        <div class="grid-2">
+          <div class="field-group">
+            <label>First name</label>
+            <input type="text" id="firstName"
+                   placeholder="First name"/>
+          </div>
+          <div class="field-group">
+            <label>Last name</label>
+            <input type="text" id="lastName"
+                   placeholder="Last name"/>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label>Street address</label>
+          <input type="text" id="address"
+                 placeholder="Street address"/>
+        </div>
+
+        <div class="grid-2">
+          <div class="field-group">
+            <label>City</label>
+            <input type="text" id="city" placeholder="City"/>
+          </div>
+          <div class="field-group">
+            <label>Postal code</label>
+            <input type="text" id="postal" placeholder="Postal code"/>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="field-group">
+            <label>Province</label>
+            <input type="text" id="province" placeholder="Province"/>
+          </div>
+          <div class="field-group">
+            <label>Phone</label>
+            <input type="tel" id="phone" placeholder="+94 77 123 4567"/>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label>Special delivery note (optional)</label>
+          <textarea id="deliveryNote"
+                    placeholder="e.g. Please handle with care! 🌸">
+          </textarea>
+        </div>
+      </div>
+
+      <!-- 2. Delivery Method -->
+      <div class="section-card">
+        <div class="sec-head">
+          <div class="sec-num">2</div>
+          <div class="sec-title">🚚 Delivery method</div>
+        </div>
+
+        <div class="delivery-opts">
+          <div class="dopt selected" id="dopt-sameday"
+               onclick="selectDelivery('sameday', 5)">
+            <div class="dopt-icon">⚡</div>
+            <strong>Same-day</strong>
+            <span>Order by 2 PM</span>
+            <div class="dtag">$5.00</div>
+          </div>
+          <div class="dopt" id="dopt-standard"
+               onclick="selectDelivery('standard', 0)">
+            <div class="dopt-icon">🚚</div>
+            <strong>Standard</strong>
+            <span>2–3 business days</span>
+            <div class="dtag free">Free</div>
+          </div>
+          <div class="dopt" id="dopt-scheduled"
+               onclick="selectDelivery('scheduled', 3)">
+            <div class="dopt-icon">📅</div>
+            <strong>Scheduled</strong>
+            <span>Choose your date</span>
+            <div class="dtag">$3.00</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Payment Method -->
+      <div class="section-card">
+        <div class="sec-head">
+          <div class="sec-num">3</div>
+          <div class="sec-title">💳 Payment method</div>
+        </div>
+
+        <div class="pay-opts">
+
+          <!-- Credit card option -->
+          <div class="popt selected" id="popt-card"
+               onclick="selectPayment('card')">
+            <div class="radio-circle sel" id="radio-card">
+              <div class="radio-dot"></div>
+            </div>
+            <div class="popt-icon">💳</div>
+            <div class="popt-info">
+              <strong>Credit / Debit card</strong>
+              <span>Visa, Mastercard, Amex</span>
+            </div>
+          </div>
+
+          <!-- Card fields (shown when card selected) -->
+          <div class="card-fields" id="cardFields">
+            <div class="field-group">
+              <label>Card number</label>
+              <input type="text" id="cardNum"
+                     placeholder="Card number" maxlength="19"/>
+            </div>
+            <div class="grid-2">
+              <div class="field-group">
+                <label>Expiry date</label>
+                <input type="text" id="expiry"
+                       placeholder="MM / YY" maxlength="7"/>
+              </div>
+              <div class="field-group">
+                <label>CVV</label>
+                <input type="password" id="cvv"
+                       placeholder="•••" maxlength="3"/>
+              </div>
+            </div>
+          </div>
+
+          <!-- PayPal -->
+          <div class="popt" id="popt-paypal"
+               onclick="selectPayment('paypal')">
+            <div class="radio-circle" id="radio-paypal"></div>
+            <div class="popt-icon">🅿️</div>
+            <div class="popt-info">
+              <strong>PayPal</strong>
+              <span>Fast and secure</span>
+            </div>
+          </div>
+
+          <!-- Cash on delivery -->
+          <div class="popt" id="popt-cash"
+               onclick="selectPayment('cash')">
+            <div class="radio-circle" id="radio-cash"></div>
+            <div class="popt-icon">💵</div>
+            <div class="popt-info">
+              <strong>Cash on delivery</strong>
+              <span>Pay when you receive</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: ORDER SUMMARY -->
+    <div class="checkout-right">
+      <div class="order-card">
+        <div class="order-card-title">🌸 Your order</div>
+
+        <!-- Items loaded by JS -->
+        <div id="checkoutItems"></div>
+
+        <hr class="sum-divider"/>
+
+        <div class="sum-row">
+          <span>Subtotal</span>
+          <strong id="coSubtotal">$0.00</strong>
+        </div>
+        <div class="sum-row">
+          <span>Discount</span>
+          <strong id="coDiscount"
+                  style="color:#16A34A">−$0.00</strong>
+        </div>
+        <div class="sum-row">
+          <span id="deliveryLabel">Same-day delivery</span>
+          <strong id="coDelivery">$5.00</strong>
+        </div>
+        <div class="sum-row">
+          <span>Gift wrapping</span>
+          <strong style="color:#16A34A">Free 🎀</strong>
+        </div>
+
+        <hr class="sum-divider"/>
+
+        <div class="sum-total">
+          <span>Total</span>
+          <strong id="coTotal">$0.00</strong>
+        </div>
+
+        <button class="btn-place-order" onclick="placeOrder()">
+          🌸 Place my order
+        </button>
+
+        <div class="ssl-note">
+          🔒 256-bit SSL encrypted &amp; secure
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-strip">
+      <p>📧 Get fresh flower deals in your inbox!</p>
+      <div class="footer-strip-right">
+        <input type="email" placeholder="Your email address..."/>
+        <button>Subscribe</button>
+      </div>
+    </div>
+    <div class="footer-main">
+      <div class="footer-brand">
+        <a href="#" class="logo" style="text-decoration:none;display:flex;align-items:center;gap:8px;">
+          <div class="logo-icon">🌸</div>
+          <div class="logo-text">Petal<span>Shop</span></div>
+        </a>
+        <p>Sri Lanka's favourite online flower shop. Hand-picked, farm-fresh flowers for every occasion.</p>
+        <div class="footer-socials">
+          <a href="#">f</a><a href="#">in</a><a href="#">tw</a><a href="#">yt</a>
+        </div>
+        <div class="footer-contact">
+          <span>📞 +94 11 234 5678</span>
+          <span>📧 hello@petalshop.lk</span>
+          <span>📍 45 Flower Lane, Colombo 03</span>
+          <span>🕐 Mon–Sat: 8 AM – 8 PM</span>
+        </div>
+      </div>
+      <div class="footer-col"><h4>Shop</h4><ul>
+        <li><a href="#">› All flowers</a></li><li><a href="#">› Roses</a></li>
+        <li><a href="#">› Sunflowers</a></li><li><a href="#">› Tulips</a></li>
+        <li><a href="#">› Bouquets</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Help</h4><ul>
+        <li><a href="#">› My account</a></li><li><a href="#">› Track order</a></li>
+        <li><a href="#">› Delivery info</a></li><li><a href="#">› Returns</a></li>
+        <li><a href="#">› FAQs</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Company</h4><ul>
+        <li><a href="#">› About us</a></li><li><a href="#">› Our florists</a></li>
+        <li><a href="#">› Blog</a></li><li><a href="#">› Careers</a></li>
+        <li><a href="#">› Sitemap</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-trust">
+      <div class="trust-item"><div class="trust-icon">🚚</div><div><strong>Same-day delivery</strong><span>Order before 2 PM</span></div></div>
+      <div class="trust-item"><div class="trust-icon">🌿</div><div><strong>100% fresh</strong><span>Or replace free</span></div></div>
+      <div class="trust-item"><div class="trust-icon">🔒</div><div><strong>Secure checkout</strong><span>256-bit SSL</span></div></div>
+      <div class="trust-item"><div class="trust-icon">🎁</div><div><strong>Free gift wrap</strong><span>Every order</span></div></div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 <b>PetalShop</b>. All rights reserved. Made with love in Sri Lanka.</p>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">Cookies</a>
+      </div>
+      <div class="footer-payments">
+        <span class="pay-badge">VISA</span><span class="pay-badge">MC</span>
+        <span class="pay-badge">PayPal</span><span class="pay-badge">Cash</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/products.js"></script>
+  <script src="../js/checkout.js"></script>
+</body>
+</html>
