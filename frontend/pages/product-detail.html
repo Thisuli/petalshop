@@ -38,11 +38,13 @@
   <!-- MAIN BODY -->
   <div class="detail-body">
 
-    <!-- LEFT — IMAGE SECTION -->
+    <!-- LEFT: IMAGE SECTION -->
     <div class="img-section">
 
       <!-- Main large image -->
       <div class="main-img-box" id="mainImgBox">
+
+        <!-- Real image -->
         <img
           src=""
           alt="Product"
@@ -51,46 +53,58 @@
           onerror="this.style.display='none';
                    document.getElementById('mainEmoji').style.display='flex'"
         />
+
+        <!-- Emoji fallback -->
         <div class="main-emoji" id="mainEmoji" style="display:none"></div>
 
-        <!-- Badges -->
-        <span class="detail-badge" id="detailBadge" style="display:none"></span>
+        <!-- Two badges exactly like Figma -->
+        <span class="badge-new-arrival" id="badgeLeft" style="display:none">
+          New arrival
+        </span>
+        <span class="badge-popular" id="badgeRight" style="display:none">
+          ⭐ Popular
+        </span>
       </div>
 
-      <!-- Thumbnail row -->
-      <div class="thumbs-row" id="thumbsRow">
-        <!-- thumbnails injected by JS -->
-      </div>
+      <!-- Thumbnails row (4 thumbs) -->
+      <div class="thumbs-row" id="thumbsRow"></div>
+
     </div>
 
-    <!-- RIGHT — PRODUCT INFO -->
+    <!-- RIGHT: PRODUCT INFO -->
     <div class="info-section">
 
       <!-- Category tag -->
-      <p class="detail-cat" id="detailCat">Roses</p>
+      <p class="detail-cat" id="detailCat">
+        🌹 ROSES · PREMIUM COLLECTION
+      </p>
 
-      <!-- Product title -->
+      <!-- Title -->
       <h1 class="detail-title" id="detailTitle">Loading...</h1>
 
       <!-- Rating row -->
       <div class="rating-row">
-        <span class="stars" id="detailStars">★★★★★</span>
-        <span class="detail-score" id="detailScore">4.9</span>
+        <span class="stars"    id="detailStars">★★★★★</span>
+        <span class="detail-score"   id="detailScore">4.9</span>
         <span class="detail-reviews" id="detailReviews">(312 reviews)</span>
         <span class="divider-dot">|</span>
-        <span class="detail-sold" id="detailSold">2,840 sold</span>
+        <span class="detail-sold"    id="detailSold">2,840 sold</span>
       </div>
 
       <!-- PRICE BOX -->
       <div class="price-box">
         <div class="price-row">
-          <span class="detail-price" id="detailPrice">$24.99</span>
-          <span class="detail-old-price" id="detailOldPrice"></span>
-          <span class="detail-save-badge" id="detailSaveBadge" style="display:none"></span>
+          <span class="detail-price"      id="detailPrice">$24.99</span>
+          <span class="detail-old-price"  id="detailOldPrice"></span>
+          <span class="detail-save-badge" id="detailSaveBadge"
+                style="display:none">Save $10</span>
         </div>
-        <p class="price-note">Includes free gift wrapping & ribbon 🎀</p>
+        <p class="price-note">
+          Includes free gift wrapping &amp; ribbon 🎀
+        </p>
         <div class="stock-badge" id="stockBadge">
-          ✅ In stock — <span id="stockCount">28</span> available
+          ✅ In stock —
+          <span id="stockCount">28</span> bouquets available
         </div>
       </div>
 
@@ -105,13 +119,17 @@
         <span class="qty-note">Max 20 per order</span>
       </div>
 
-      <!-- ACTION BUTTONS -->
+      <!-- ADD TO CART + WISHLIST (side by side like Figma) -->
       <div class="btn-row">
         <button class="btn-atc" onclick="addToCartDetail()">
           🛒 Add to cart
         </button>
-        <button class="btn-wish" id="wishBtn" onclick="toggleWishDetail()">🤍</button>
+        <button class="btn-wish" id="wishBtn" onclick="toggleWishDetail()">
+          🤍
+        </button>
       </div>
+
+      <!-- BUY NOW -->
       <button class="btn-buy" onclick="buyNow()">
         ⚡ Buy now — <span id="buyNowPrice">$24.99</span>
       </button>
@@ -121,47 +139,54 @@
         <div class="del-icon">🚚</div>
         <div class="del-info">
           <strong>Same-day delivery available!</strong>
-          <span>Order before 2:00 PM — arrives today.
-                Free delivery on orders over $50.</span>
+          <span>
+            Order before 2:00 PM — arrives today.
+            Free delivery on orders over $50.
+          </span>
         </div>
       </div>
 
       <!-- TABS -->
       <div class="tabs">
-        <button class="tab active" onclick="switchTab('description', this)">
+        <button class="tab active"
+          onclick="switchTab('description', this)">
           Description
         </button>
-        <button class="tab" onclick="switchTab('care', this)">
+        <button class="tab"
+          onclick="switchTab('care', this)">
           Care Tips
         </button>
-        <button class="tab" onclick="switchTab('reviews', this)">
+        <button class="tab"
+          onclick="switchTab('reviews', this)">
           Reviews (<span id="reviewCount">312</span>)
         </button>
       </div>
 
-      <!-- TAB CONTENT -->
+      <!-- TAB: Description -->
       <div class="tab-content" id="tabDescription">
-        <p id="detailDescription">Loading description...</p>
+        <p id="detailDescription">Loading...</p>
       </div>
 
+      <!-- TAB: Care Tips -->
       <div class="tab-content" id="tabCare" style="display:none">
         <ul class="care-list">
           <li>🌊 Change water every 2 days</li>
           <li>✂️ Trim stems at an angle every 2–3 days</li>
           <li>☀️ Keep away from direct sunlight</li>
-          <li>❄️ Store in a cool room (15–20°C is ideal)</li>
+          <li>❄️ Store in a cool room (15–20°C ideal)</li>
           <li>🧪 Use the flower food sachet provided</li>
           <li>🍎 Keep away from fruits (ethylene gas)</li>
         </ul>
       </div>
 
+      <!-- TAB: Reviews -->
       <div class="tab-content" id="tabReviews" style="display:none">
         <div class="review-card">
           <div class="reviewer-info">
             <div class="reviewer-avatar">AK</div>
             <div>
               <strong>Amaya K.</strong>
-              <span class="stars" style="font-size:12px">★★★★★</span>
+              <span class="stars" style="font-size:11px">★★★★★</span>
             </div>
           </div>
           <p class="review-text">
@@ -174,12 +199,12 @@
             <div class="reviewer-avatar">NP</div>
             <div>
               <strong>Nimal P.</strong>
-              <span class="stars" style="font-size:12px">★★★★★</span>
+              <span class="stars" style="font-size:11px">★★★★★</span>
             </div>
           </div>
           <p class="review-text">
-            "Delivered within 2 hours! The flowers were even more beautiful
-             in person. Will definitely order again."
+            "Delivered within 2 hours! The flowers were even more
+             beautiful in person. Will definitely order again."
           </p>
         </div>
         <div class="review-card">
@@ -187,20 +212,18 @@
             <div class="reviewer-avatar">SR</div>
             <div>
               <strong>Sithumi R.</strong>
-              <span class="stars" style="font-size:12px">★★★★☆</span>
+              <span class="stars" style="font-size:11px">★★★★☆</span>
             </div>
           </div>
           <p class="review-text">
-            "Great quality and packaging. The gift wrapping was a lovely
-             touch. Stayed fresh for over a week!"
+            "Great quality and packaging. The gift wrapping was a
+             lovely touch. Stayed fresh for over a week!"
           </p>
         </div>
       </div>
 
       <!-- OCCASION TAGS -->
-      <div class="occasion-tags" id="occasionTags">
-        <!-- injected by JS -->
-      </div>
+      <div class="occasion-tags" id="occasionTags"></div>
 
     </div>
   </div>
@@ -221,8 +244,9 @@
           <div class="logo-icon">🌸</div>
           <div class="logo-text">Petal<span>Shop</span></div>
         </a>
-        <p>Sri Lanka's favourite online flower shop. Hand-picked,
-           farm-fresh flowers for every occasion.</p>
+        <p>Sri Lanka's favourite online flower shop.
+           Hand-picked, farm-fresh flowers for every occasion
+           — delivered with love.</p>
         <div class="footer-socials">
           <a href="#">f</a><a href="#">in</a>
           <a href="#">tw</a><a href="#">yt</a>
@@ -240,6 +264,7 @@
         <li><a href="#">› Sunflowers</a></li>
         <li><a href="#">› Tulips</a></li>
         <li><a href="#">› Bouquets</a></li>
+        <li><a href="#">› Gift sets</a></li>
       </ul></div>
       <div class="footer-col"><h4>Help</h4><ul>
         <li><a href="#">› My account</a></li>
@@ -247,31 +272,37 @@
         <li><a href="#">› Delivery info</a></li>
         <li><a href="#">› Returns</a></li>
         <li><a href="#">› FAQs</a></li>
+        <li><a href="#">› Contact us</a></li>
       </ul></div>
       <div class="footer-col"><h4>Company</h4><ul>
         <li><a href="#">› About us</a></li>
         <li><a href="#">› Our florists</a></li>
         <li><a href="#">› Blog</a></li>
         <li><a href="#">› Careers</a></li>
+        <li><a href="#">› Press</a></li>
         <li><a href="#">› Sitemap</a></li>
       </ul></div>
     </div>
     <div class="footer-trust">
       <div class="trust-item">
         <div class="trust-icon">🚚</div>
-        <div><strong>Same-day delivery</strong><span>Order before 2 PM</span></div>
+        <div><strong>Same-day delivery</strong>
+             <span>Order before 2 PM</span></div>
       </div>
       <div class="trust-item">
         <div class="trust-icon">🌿</div>
-        <div><strong>100% fresh</strong><span>Or replace free</span></div>
+        <div><strong>100% fresh</strong>
+             <span>Or replace free</span></div>
       </div>
       <div class="trust-item">
         <div class="trust-icon">🔒</div>
-        <div><strong>Secure checkout</strong><span>256-bit SSL</span></div>
+        <div><strong>Secure checkout</strong>
+             <span>256-bit SSL</span></div>
       </div>
       <div class="trust-item">
         <div class="trust-icon">🎁</div>
-        <div><strong>Free gift wrap</strong><span>Every order</span></div>
+        <div><strong>Free gift wrap</strong>
+             <span>Every order</span></div>
       </div>
     </div>
     <div class="footer-bottom">
@@ -291,7 +322,6 @@
     </div>
   </footer>
 
-  <!-- JS files — products.js first (has allProducts data) -->
   <script src="../js/products.js"></script>
   <script src="../js/product-detail.js"></script>
 
