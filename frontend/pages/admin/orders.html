@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PetalShop — Admin Orders</title>
+  <link rel="stylesheet" href="../../css/style.css"/>
+  <link rel="stylesheet" href="../../css/admin.css"/>
+</head>
+<body>
+
+  <!-- ADMIN NAVBAR -->
+  <nav class="admin-nav">
+    <a href="../../pages/products.html" class="logo">
+      <div class="logo-dot">🌸</div>
+      <div class="logo-name">Petal<b>Shop</b></div>
+    </a>
+    <div class="admin-panel-badge">⚙️ Admin Panel</div>
+    <div class="admin-nav-right">
+      <button class="notif-btn">
+        🔔<div class="notif-dot"></div>
+      </button>
+      <div class="admin-user-info">
+        <div class="admin-avatar">TG</div>
+        <span class="admin-name-text">Thisuli · Admin</span>
+      </div>
+    </div>
+  </nav>
+
+  <div class="admin-body">
+
+    <!-- SIDEBAR -->
+    <div class="admin-sidebar">
+      <div class="asb-section">MAIN</div>
+      <a href="dashboard.html" class="asb-item">
+        <span class="asb-icon">📊</span> Dashboard
+      </a>
+      <a href="orders.html" class="asb-item active">
+        <span class="asb-icon">📦</span> All Orders
+      </a>
+      <a href="#" class="asb-item">
+        <span class="asb-icon">👥</span> Customers
+      </a>
+
+      <div class="asb-section">PRODUCTS</div>
+      <a href="dashboard.html" class="asb-item">
+        <span class="asb-icon">🌸</span> All Products
+      </a>
+      <a href="#" class="asb-item">
+        <span class="asb-icon">➕</span> Add Product
+      </a>
+      <a href="#" class="asb-item">
+        <span class="asb-icon">🗂️</span> Categories
+      </a>
+
+      <div class="asb-section">SETTINGS</div>
+      <a href="#" class="asb-item">
+        <span class="asb-icon">⚙️</span> Settings
+      </a>
+      <a href="../../pages/login.html" class="asb-item">
+        <span class="asb-icon">🚪</span> Logout
+      </a>
+    </div>
+
+    <!-- MAIN -->
+    <div class="admin-main">
+
+      <!-- STAT CARDS -->
+      <div class="admin-stats">
+        <div class="admin-stat-card asc-black">
+          <span class="asc-icon">📦</span>
+          <span class="asc-val">142</span>
+          <span class="asc-label">Total orders</span>
+          <span class="asc-change up">↑ +12 today</span>
+        </div>
+        <div class="admin-stat-card asc-yellow">
+          <span class="asc-icon">⏳</span>
+          <span class="asc-val">8</span>
+          <span class="asc-label">Pending orders</span>
+          <span class="asc-change down">⚠ Needs action</span>
+        </div>
+        <div class="admin-stat-card asc-green">
+          <span class="asc-icon">✅</span>
+          <span class="asc-val">118</span>
+          <span class="asc-label">Delivered</span>
+          <span class="asc-change up">↑ 83% success rate</span>
+        </div>
+        <div class="admin-stat-card asc-red">
+          <span class="asc-icon">❌</span>
+          <span class="asc-val">6</span>
+          <span class="asc-label">Cancelled</span>
+          <span class="asc-change down">↓ 4% cancel rate</span>
+        </div>
+      </div>
+
+      <!-- Orders section header -->
+      <div class="section-title-row">
+        <div class="section-title">📋 All Customer Orders</div>
+        <button class="btn-export">📥 Export CSV</button>
+      </div>
+
+      <!-- Search -->
+      <div class="filter-bar">
+        <div class="filter-search" style="flex:1">
+          <svg width="13" height="13" fill="none"
+               stroke="#aaa" stroke-width="2"
+               viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="8"/>
+            <path d="M21 21l-4.35-4.35"/>
+          </svg>
+          <input type="text" id="orderSearch"
+                 placeholder="Search by order ID or customer name..."
+                 oninput="filterOrdersAdmin()"/>
+        </div>
+      </div>
+
+      <!-- Status + Date dropdowns -->
+      <div class="filter-bar">
+        <select class="filter-sel" id="statusFilter"
+                onchange="filterOrdersAdmin()"
+                style="flex:1">
+          <option value="">All statuses</option>
+          <option value="New">New</option>
+          <option value="Processing">Processing</option>
+          <option value="Shipped">Shipped</option>
+          <option value="Delivered">Delivered</option>
+          <option value="Cancelled">Cancelled</option>
+        </select>
+        <select class="filter-sel" id="dateFilter"
+                onchange="filterOrdersAdmin()"
+                style="flex:1">
+          <option value="">All dates</option>
+          <option value="today">Today</option>
+          <option value="week">This week</option>
+          <option value="month">This month</option>
+        </select>
+      </div>
+
+      <!-- Date pills -->
+      <div class="date-pills">
+        <button class="dpill active"
+          onclick="setDatePill('all', this)">All</button>
+        <button class="dpill"
+          onclick="setDatePill('today', this)">Today</button>
+        <button class="dpill"
+          onclick="setDatePill('week', this)">This week</button>
+      </div>
+
+      <!-- Orders Table -->
+      <div class="admin-table-wrap">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>Customer</th>
+              <th>Items ordered</th>
+              <th>Total</th>
+              <th>Payment</th>
+              <th>Order status</th>
+              <th>Date &amp; time</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="ordersTableBody">
+            <!-- Filled by JS -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Pagination -->
+      <div class="pagination" id="pagination">
+        <div class="pag-info">Showing 1–5 of 142 orders</div>
+        <div class="pag-btns">
+          <button class="pag-btn">‹</button>
+          <button class="pag-btn active">1</button>
+          <button class="pag-btn">2</button>
+          <button class="pag-btn">3</button>
+          <button class="pag-btn">...</button>
+          <button class="pag-btn">29</button>
+          <button class="pag-btn">›</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-strip">
+      <p>📧 Get fresh flower deals in your inbox!</p>
+      <div class="footer-strip-right">
+        <input type="email" placeholder="Your email address..."/>
+        <button>Subscribe</button>
+      </div>
+    </div>
+    <div class="footer-main">
+      <div class="footer-brand">
+        <a href="#" class="logo"
+           style="text-decoration:none;display:flex;
+                  align-items:center;gap:8px;">
+          <div class="logo-icon">🌸</div>
+          <div class="logo-text">Petal<span>Shop</span></div>
+        </a>
+        <p>Sri Lanka's favourite online flower shop.</p>
+        <div class="footer-socials">
+          <a href="#">f</a><a href="#">in</a>
+          <a href="#">tw</a><a href="#">yt</a>
+        </div>
+        <div class="footer-contact">
+          <span>📞 +94 11 234 5678</span>
+          <span>📧 hello@petalshop.lk</span>
+          <span>📍 45 Flower Lane, Colombo 03</span>
+          <span>🕐 Mon–Sat: 8 AM – 8 PM</span>
+        </div>
+      </div>
+      <div class="footer-col"><h4>Shop</h4><ul>
+        <li><a href="#">› All flowers</a></li>
+        <li><a href="#">› Roses</a></li>
+        <li><a href="#">› Sunflowers</a></li>
+        <li><a href="#">› Tulips</a></li>
+        <li><a href="#">› Bouquets</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Help</h4><ul>
+        <li><a href="#">› My account</a></li>
+        <li><a href="#">› Track order</a></li>
+        <li><a href="#">› Delivery info</a></li>
+        <li><a href="#">› Returns</a></li>
+        <li><a href="#">› FAQs</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Company</h4><ul>
+        <li><a href="#">› About us</a></li>
+        <li><a href="#">› Our florists</a></li>
+        <li><a href="#">› Blog</a></li>
+        <li><a href="#">› Careers</a></li>
+        <li><a href="#">› Sitemap</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-trust">
+      <div class="trust-item">
+        <div class="trust-icon">🚚</div>
+        <div><strong>Same-day delivery</strong>
+             <span>Order before 2 PM</span></div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">🌿</div>
+        <div><strong>100% fresh</strong>
+             <span>Or replace free</span></div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">🔒</div>
+        <div><strong>Secure checkout</strong>
+             <span>256-bit SSL</span></div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">🎁</div>
+        <div><strong>Free gift wrap</strong>
+             <span>Every order</span></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 <b>PetalShop</b>. All rights reserved.
+         Made with love in Sri Lanka.</p>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms</a>
+        <a href="#">Cookies</a>
+      </div>
+      <div class="footer-payments">
+        <span class="pay-badge">VISA</span>
+        <span class="pay-badge">MC</span>
+        <span class="pay-badge">PayPal</span>
+        <span class="pay-badge">Cash</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../js/products.js"></script>
+  <script src="../../js/admin.js"></script>
+</body>
+</html>
