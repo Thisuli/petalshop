@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PetalShop — Order Confirmed!</title>
+  <link rel="stylesheet" href="../css/style.css"/>
+  <link rel="stylesheet" href="../css/order-success.css"/>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a href="products.html" class="logo">
+      <div class="logo-icon">🌸</div>
+      <div class="logo-text">Petal<span>Shop</span></div>
+    </a>
+    <a href="products.html" class="nav-link">Home</a>
+    <a href="products.html" class="nav-link">Products</a>
+    <a href="order-history.html" class="nav-link">My Orders</a>
+    <a href="login.html"    class="nav-link">Account</a>
+    <a href="cart.html" class="cart-btn">
+      🛒 Cart <span class="cart-count" id="cartCount">0</span>
+    </a>
+  </nav>
+
+  <!-- STEPS BAR — all 3 complete -->
+  <div class="steps-bar">
+    <div class="step">
+      <div class="sc done">✓</div>
+      <span class="step-label done">Cart</span>
+    </div>
+    <div class="step-line done"></div>
+    <div class="step">
+      <div class="sc done">✓</div>
+      <span class="step-label done">Checkout</span>
+    </div>
+    <div class="step-line success"></div>
+    <div class="step">
+      <div class="sc success">✓</div>
+      <span class="step-label success">Order confirmed!</span>
+    </div>
+  </div>
+
+  <!-- MAIN BODY -->
+  <div class="success-body">
+
+    <!-- LEFT -->
+    <div class="success-left">
+
+      <!-- Main success card -->
+      <div class="success-card">
+
+        <!-- Flower icon -->
+        <div class="success-icon-wrap">🌸</div>
+
+        <h2 class="success-title">Order placed successfully!</h2>
+        <p class="success-sub">
+          Thank you, <strong id="customerName">Thisuli</strong>!
+          Your beautiful flowers are being carefully<br>
+          prepared by our expert florists with love and care. 🌿
+        </p>
+
+        <!-- Order reference -->
+        <div class="order-ref-box">
+          <span class="order-ref-label">
+            Your order reference number
+          </span>
+          <div class="order-ref-num" id="orderRefNum">
+            #PS-2025-0058
+          </div>
+        </div>
+
+        <!-- Delivery info -->
+        <div class="delivery-info-card">
+          <div class="di-title">📦 Delivery information</div>
+          <div class="di-row">
+            <span class="di-label">Delivery address</span>
+            <span class="di-value" id="diAddress">
+              45 Galle Road, Colombo 03
+            </span>
+          </div>
+          <div class="di-row">
+            <span class="di-label">Estimated arrival</span>
+            <span class="di-value green">Today by 5:00 PM ⚡</span>
+          </div>
+          <div class="di-row">
+            <span class="di-label">Delivery method</span>
+            <span class="di-value" id="diMethod">Same-day delivery</span>
+          </div>
+          <div class="di-row">
+            <span class="di-label">Payment method</span>
+            <span class="di-value" id="diPayment">
+              Credit card ****4242
+            </span>
+          </div>
+          <div class="di-row">
+            <span class="di-label">Payment status</span>
+            <span class="di-value green">✅ Paid successfully</span>
+          </div>
+        </div>
+
+        <!-- Live tracking -->
+        <div class="tracking-card">
+          <div class="tracking-title">📍 Live order tracking</div>
+          <div class="prog-bar">
+            <div class="prog-fill"></div>
+          </div>
+          <div class="prog-steps">
+            <span class="pstep done">Order<br>confirmed</span>
+            <span class="pstep">Being<br>prepared</span>
+            <span class="pstep">Out for<br>delivery</span>
+            <span class="pstep">Delivered<br>🌸</span>
+          </div>
+        </div>
+
+        <!-- Three action buttons -->
+        <div class="action-btns">
+          <a href="products.html" class="btn-action">
+            <span class="ba-icon">🛍️</span>
+            <span class="ba-text">Continue<br>shopping</span>
+          </a>
+          <a href="order-history.html" class="btn-action">
+            <span class="ba-icon">📍</span>
+            <span class="ba-text">Track<br>my order</span>
+          </a>
+          <a href="order-history.html" class="btn-action">
+            <span class="ba-icon">📋</span>
+            <span class="ba-text">View order<br>details</span>
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Email confirmation note -->
+      <div class="email-note">
+        <div class="en-icon">📧</div>
+        <div class="en-text">
+          <strong>Confirmation email sent!</strong>
+          <span>
+            We've sent your full order confirmation to
+            <strong id="confirmEmail">thisuli@example.com</strong>.
+            Please check your inbox — it includes your receipt
+            and delivery tracking link.
+          </span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT -->
+    <div class="success-right">
+
+      <!-- Order summary -->
+      <div class="sum-card">
+        <div class="sum-title">🌸 Order summary</div>
+
+        <!-- Items filled by JS -->
+        <div id="successItems"></div>
+
+        <hr class="sum-divider"/>
+
+        <div class="sum-row">
+          <span>Subtotal</span>
+          <strong id="sucSubtotal">$0.00</strong>
+        </div>
+        <div class="sum-row">
+          <span>Discount</span>
+          <strong id="sucDiscount"
+                  style="color:#16A34A">−$0.00</strong>
+        </div>
+        <div class="sum-row">
+          <span>Same-day delivery</span>
+          <strong id="sucDelivery">$5.00</strong>
+        </div>
+        <div class="sum-row">
+          <span>Gift wrapping</span>
+          <strong style="color:#16A34A">Free 🎀</strong>
+        </div>
+
+        <hr class="sum-divider"/>
+
+        <div class="sum-total-row">
+          <span>Total paid</span>
+          <strong id="sucTotal">$0.00</strong>
+        </div>
+
+        <div class="sum-saved-note" id="sucSaved"
+             style="display:none">
+          🎉 You saved <span id="sucSavedAmt">$0.00</span>
+          on this order!
+        </div>
+      </div>
+
+      <!-- Share card -->
+      <div class="share-card">
+        <div class="share-title">🤗 Share the love!</div>
+        <div class="share-sub">Tell your friends about PetalShop</div>
+        <div class="share-btns">
+          <button class="share-btn" onclick="shareOn('facebook')">
+            <span class="share-btn-icon">📘</span>
+            Facebook
+          </button>
+          <button class="share-btn" onclick="shareOn('whatsapp')">
+            <span class="share-btn-icon">💬</span>
+            WhatsApp
+          </button>
+          <button class="share-btn" onclick="copyLink()">
+            <span class="share-btn-icon">🔗</span>
+            Copy link
+          </button>
+        </div>
+      </div>
+
+      <!-- What happens next -->
+      <div class="next-card">
+        <div class="next-title">✨ What happens next?</div>
+        <div class="next-item">
+          <div class="next-icon">🌿</div>
+          <div class="next-info">
+            <strong>Florists are preparing</strong>
+            <span>Your bouquets are being hand-arranged</span>
+          </div>
+        </div>
+        <div class="next-item">
+          <div class="next-icon">🚚</div>
+          <div class="next-info">
+            <strong>Out for delivery soon</strong>
+            <span>Driver will pick up by 3:00 PM</span>
+          </div>
+        </div>
+        <div class="next-item">
+          <div class="next-icon">📧</div>
+          <div class="next-info">
+            <strong>You'll get a notification</strong>
+            <span>SMS + email when your order ships</span>
+          </div>
+        </div>
+        <div class="next-item">
+          <div class="next-icon">🌸</div>
+          <div class="next-info">
+            <strong>Enjoy your flowers!</strong>
+            <span>Fresh guaranteed for 7+ days</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-strip">
+      <p>📧 Get fresh flower deals in your inbox!</p>
+      <div class="footer-strip-right">
+        <input type="email" placeholder="Your email address..."/>
+        <button>Subscribe</button>
+      </div>
+    </div>
+    <div class="footer-main">
+      <div class="footer-brand">
+        <a href="#" class="logo"
+           style="text-decoration:none;display:flex;
+                  align-items:center;gap:8px;">
+          <div class="logo-icon">🌸</div>
+          <div class="logo-text">Petal<span>Shop</span></div>
+        </a>
+        <p>Sri Lanka's favourite online flower shop.
+           Hand-picked, farm-fresh flowers for every occasion
+           — delivered with love.</p>
+        <div class="footer-socials">
+          <a href="#">f</a><a href="#">in</a>
+          <a href="#">tw</a><a href="#">yt</a>
+        </div>
+        <div class="footer-contact">
+          <span>📞 +94 11 234 5678</span>
+          <span>📧 hello@petalshop.lk</span>
+          <span>📍 45 Flower Lane, Colombo 03</span>
+          <span>🕐 Mon–Sat: 8 AM – 8 PM</span>
+        </div>
+      </div>
+      <div class="footer-col"><h4>Shop</h4><ul>
+        <li><a href="#">› All flowers</a></li>
+        <li><a href="#">› Roses</a></li>
+        <li><a href="#">› Sunflowers</a></li>
+        <li><a href="#">› Tulips</a></li>
+        <li><a href="#">› Bouquets</a></li>
+        <li><a href="#">› Gift sets</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Help</h4><ul>
+        <li><a href="#">› My account</a></li>
+        <li><a href="#">› Track order</a></li>
+        <li><a href="#">› Delivery info</a></li>
+        <li><a href="#">› Returns</a></li>
+        <li><a href="#">› FAQs</a></li>
+        <li><a href="#">› Contact us</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Company</h4><ul>
+        <li><a href="#">› About us</a></li>
+        <li><a href="#">› Our florists</a></li>
+        <li><a href="#">› Blog</a></li>
+        <li><a href="#">› Careers</a></li>
+        <li><a href="#">› Sitemap</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-trust">
+      <div class="trust-item">
+        <div class="trust-icon">🚚</div>
+        <div><strong>Same-day delivery</strong>
+             <span>Order before 2 PM</span></div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">🌿</div>
+        <div><strong>100% fresh</strong>
+             <span>Or replace free</span></div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">🔒</div>
+        <div><strong>Secure checkout</strong>
+             <span>256-bit SSL</span></div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">🎁</div>
+        <div><strong>Free gift wrap</strong>
+             <span>Every order</span></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 <b>PetalShop</b>. All rights reserved.
+         Made with love in Sri Lanka.</p>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Cookies</a>
+      </div>
+      <div class="footer-payments">
+        <span class="pay-badge">VISA</span>
+        <span class="pay-badge">MC</span>
+        <span class="pay-badge">PayPal</span>
+        <span class="pay-badge">Cash</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/products.js"></script>
+  <script src="../js/order-success.js"></script>
+</body>
+</html>
